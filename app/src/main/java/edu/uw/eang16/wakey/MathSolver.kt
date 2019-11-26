@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_math_solver.*
 import kotlin.random.Random
-import android.text.TextWatcher as
+import android.widget.Toast
 
 enum class Operator {
     PLUS {
@@ -36,7 +36,10 @@ class MathSolver: AppCompatActivity() {
 
         snooze.setOnClickListener {
             if (input_answer.text.toString() === "$answer") {
+                Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
                 startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -48,20 +51,17 @@ class MathSolver: AppCompatActivity() {
         answer = (Random.nextInt(20) + 1)
         var result: String = "$answer"
         for (operator in todayOperator) {
+            val temp = Random.nextInt(20) + 1
             if (operator === Operator.PLUS) {
-                val temp = Random.nextInt(20) + 1
                 answer += temp
                 result += " + ${temp}"
             } else if (operator === Operator.MINUS) {
-                val temp = Random.nextInt(20) + 1
                 answer -= temp
                 result += " - ${temp}"
             } else if (operator === Operator.MULTIPLY) {
-                val temp = Random.nextInt(20) + 1
                 answer *= temp
                 result += " x ${temp}"
             } else {
-                val temp = Random.nextInt(20) + 1
                 answer /= temp
                 result += " / ${temp}"
             }
