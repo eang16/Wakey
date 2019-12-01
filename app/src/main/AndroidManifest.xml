@@ -9,10 +9,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditAlarm"
+        <activity android:name=".ShakeServiceActivity"></activity>
+
+        <service
+            android:name=".ShakeService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".EditAlarm"
             android:label="@string/editalarm"
-            android:parentActivityName=".MainActivity">
-        </activity>
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"

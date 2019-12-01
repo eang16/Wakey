@@ -3,6 +3,7 @@ package edu.uw.eang16.wakey
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.TimePickerDialog
+import android.content.Context
 import android.media.Ringtone
 import android.media.RingtoneManager
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +22,6 @@ import android.media.RingtoneManager.TYPE_ALARM
 import android.net.Uri
 
 import android.content.Intent
-
 
 class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
@@ -60,7 +60,6 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
             startActivityForResult(intent, 1)
 
-            @Override
             fun onClick(v: View) {
                 if (ringTone != null) {
                     ringTone.stop();
@@ -69,6 +68,11 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             }
         }
 
+        //test shaker
+        shakerbtn.setOnClickListener {
+            val intent = Intent(this, ShakeServiceActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     // for task
@@ -130,6 +134,4 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
         builder.show()
     }
-
-
 }

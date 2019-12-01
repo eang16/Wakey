@@ -253,6 +253,14 @@
         android:onClick="snoozeLimitDialog"
         />
 
+    <Button
+        android:id="@+id/shakerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="test shaker"
+        app:layout_constraintTop_toBottomOf="@id/snoozeLimit"/>
+
 
 
 
