@@ -42,9 +42,9 @@ class ShakeService: Service(), SensorEventListener {
         mAccel = mAccel * 0.9f + delta
         if (mAccel > 12) {
             mShakeCount++
-            ShakeServiceActivity.shakeText.text = "$mShakeCount%"
+            ShakeServiceActivity.shakeText!!.text = "$mShakeCount%"
             if (mShakeCount >= 100) {
-                ShakeServiceActivity.shakeText.text = "100%"
+                ShakeServiceActivity.shakeText!!.text = "100%"
             }
         }
     }

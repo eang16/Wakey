@@ -261,6 +261,14 @@
         android:text="test shaker"
         app:layout_constraintTop_toBottomOf="@id/snoozeLimit"/>
 
+    <Button
+        android:id="@+id/scannerbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="test scanner"
+        app:layout_constraintTop_toBottomOf="@id/shakerbtn"/>
+
 
 
 

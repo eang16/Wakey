@@ -1,5 +1,6 @@
 package edu.uw.eang16.wakey
 
+import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.TimePickerDialog
@@ -22,6 +23,9 @@ import android.media.RingtoneManager.TYPE_ALARM
 import android.net.Uri
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
@@ -72,6 +76,19 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         shakerbtn.setOnClickListener {
             val intent = Intent(this, ShakeServiceActivity::class.java)
             startActivity(intent)
+        }
+
+        //test scanner
+        scannerbtn.setOnClickListener {
+            val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
+                val intent = Intent(this, ScanActivity::class.java)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, ScanActivity::class.java)
+                startActivity(intent)
+            }
         }
     }
 
