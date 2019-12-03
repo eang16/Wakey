@@ -38,6 +38,7 @@ class MainActivity : AppCompatActivity() {
 }
 
 private class ViewHolder(var time: TextView? = null, var active: Switch? = null, var days: ConstraintLayout? = null)
+
 enum class Task { Shake, Scanner, Math, None }
 
 // Todo: Read all information unique to a single alarm
@@ -65,6 +66,12 @@ class ForecastAdapter(context: Context, objects: List<AlarmData>):
         holder.time!!.text = alarm.time
         //Todo: set the day color to be proper
         holder.active!!.isChecked = alarm.active
+        holder.time!!.tag = alarm
+
+        view!!.setOnClickListener {
+            val thisAlarmData = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
+            // TODO: Start an activity for editing an alarm
+        }
 
         return view!!
     }
