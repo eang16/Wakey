@@ -8,7 +8,8 @@ import android.view.MenuItem
 
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
-
+import java.io.File
+import java.io.FileReader
 
 
 class MainActivity : AppCompatActivity() {
@@ -18,10 +19,18 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
+        if (!filesDir.exists()) {
+            filesDir.mkdirs()
+        }
+        val file = File(filesDir, "alarms")
+        val rawText = FileReader(file).readText()
+
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditAlarm::class.java)
             startActivity(intent)
         }
     }
 
+    // Todo: Read all information unique to a single alarm
+    data class AlarmInfo(var name: String, var day: Char, var time: String)
 }
