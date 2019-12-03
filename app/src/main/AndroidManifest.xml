@@ -3,6 +3,7 @@
     package="edu.uw.eang16.wakey">
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -34,6 +35,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!-- TODO: Add an AlarmService for the receiver activity -->
     </application>
 
 </manifest>
