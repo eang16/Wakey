@@ -24,6 +24,7 @@ import android.net.Uri
 
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.widget.SeekBar
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -32,13 +33,46 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             "Play a game", "Random")
     private lateinit var ringTone: Ringtone
     private lateinit var uriAlarm: Uri
+    private lateinit var data: AlarmData
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_alarm)
 
-        val cal = Calendar.getInstance()
-        time.text = SimpleDateFormat("hh:mm a").format(cal.time)
+        if (intent.hasExtra("data")) {
+            data = intent.extras!!["data"] as AlarmData
+        } else {
+            var id = Random().nextInt()
+            var day = booleanArrayOf(false, false, false, false, false, false, false)
+            var dtime = Calendar.getInstance()
+            var task = Task.NONE
+            var ringtone = RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_RINGTONE)
+            var volume = 100
+            var vibration = 100
+            var snooze = 5
+            var limit = 3
+            var active = false
+            data = AlarmData(id, day, dtime, task, ringtone, volume, vibration, snooze, limit, active)
+        }
+        time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
+
+        //Sliders
+        volumeBar.progress = data.volume
+        vibrationBar.progress = data.vibration
+        volumeBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                data.volume = i
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
+        vibrationBar.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, i: Int, b: Boolean) {
+                data.vibration = i
+            }
+            override fun onStartTrackingTouch(seekBar: SeekBar) {}
+            override fun onStopTrackingTouch(seekBar: SeekBar) {}
+        })
 
         //task spinner dropdown
         taskSpinner.onItemSelectedListener = this
@@ -49,16 +83,15 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         //time picker
         time.setOnClickListener {
             val timeSetListener = TimePickerDialog.OnTimeSetListener { _, hour, minute ->
-                cal.set(Calendar.HOUR_OF_DAY, hour)
-                cal.set(Calendar.MINUTE, minute)
-                time.text = SimpleDateFormat("hh:mm a").format(cal.time)
+                data.time.set(Calendar.HOUR_OF_DAY, hour)
+                data.time.set(Calendar.MINUTE, minute)
+                time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
             }
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
-
+            TimePickerDialog(this, timeSetListener, data.time.get(Calendar.HOUR_OF_DAY), data.time.get(Calendar.MINUTE), false).show()
         }
 
         // ringtone picker
-        uriAlarm = RingtoneManager.getDefaultUri(TYPE_ALARM);
+        uriAlarm = RingtoneManager.getDefaultUri(TYPE_ALARM)
         ringtone.setOnClickListener {
             ringTone = RingtoneManager.getRingtone(applicationContext, uriAlarm)
             val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
@@ -66,7 +99,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
             fun onClick(v: View) {
                 if (ringTone != null) {
-                    ringTone.stop();
+                    ringTone.stop()
                 }
                 ringTone.play()
             }
@@ -105,6 +138,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             val uri = data!!.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
 
             if (uri != null) {
+                //CTRLF
                 ringtone.text = RingtoneManager.getRingtone(applicationContext, uri).getTitle(this)
             }
         }

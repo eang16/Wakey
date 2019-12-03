@@ -183,6 +183,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/satBtn"
         app:layout_constraintTop_toBottomOf="@id/volumeTitle"
+        android:max="100"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"/>
 
@@ -200,6 +201,7 @@
     <SeekBar
         android:id="@+id/vibrationBar"
         android:layout_width="0dp"
+        android:max="100"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/satBtn"

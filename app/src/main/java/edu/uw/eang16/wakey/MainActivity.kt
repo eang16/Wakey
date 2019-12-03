@@ -7,14 +7,18 @@ import androidx.appcompat.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
+import android.os.Parcelable
 import android.view.*
 import android.widget.ArrayAdapter
 import android.widget.Switch
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
+import kotlinx.android.parcel.Parcelize
 import java.io.File
 import java.io.FileReader
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -24,28 +28,34 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        if (!filesDir.exists()) {
-            filesDir.mkdirs()
-        }
-        val file = File(filesDir, "alarms")
-        val rawText = FileReader(file).readText()
+        updateAlarmList()
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditAlarm::class.java)
             startActivity(intent)
         }
     }
+
+    override fun onResume() {
+        super.onResume()
+        updateAlarmList()
+    }
+
+    fun updateAlarmList() {
+        if (!filesDir.exists()) {
+            filesDir.mkdirs()
+        }
+        val file = File(filesDir, "alarms")
+        if (!file.exists()) {
+            file.createNewFile()
+        }
+        val rawText = FileReader(file).readText()
+    }
 }
 
 private class ViewHolder(var time: TextView? = null, var active: Switch? = null, var days: ConstraintLayout? = null)
 
-enum class Task { Shake, Scanner, Math, None }
-
-// Todo: Read all information unique to a single alarm
-data class AlarmData(var id: Int, var day: String, var time: String, var task: Task, var ringtone: String,
-                     var volume: Int, var vibration: Int, var snooze: Int, var limit: Int, var active: Boolean)
-
-class ForecastAdapter(context: Context, objects: List<AlarmData>):
+class AlarmAdapter(context: Context, objects: List<AlarmData>):
     ArrayAdapter<AlarmData>(context, R.layout.alarm_list, objects) {
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
@@ -63,14 +73,15 @@ class ForecastAdapter(context: Context, objects: List<AlarmData>):
         } else {
             holder = view.tag as ViewHolder
         }
-        holder.time!!.text = alarm.time
+        holder.time!!.text = SimpleDateFormat("hh:mm a").format(alarm.time.time)
         //Todo: set the day color to be proper
         holder.active!!.isChecked = alarm.active
         holder.time!!.tag = alarm
 
         view!!.setOnClickListener {
-            val thisAlarmData = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
-            // TODO: Start an activity for editing an alarm
+            val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
+            val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)
+            context.startActivity(intent)
         }
 
         return view!!
