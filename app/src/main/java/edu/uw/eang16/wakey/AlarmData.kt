@@ -12,10 +12,11 @@ data class AlarmData(var id: String, var day: BooleanArray, var time: Calendar, 
                      var ringtone: Uri, var volume: Int, var vibration: Int, var snooze: Int,
                      var limit: Int, var active: Boolean): Parcelable {
     override fun toString(): String {
-        val date = SimpleDateFormat("HH:mm:ss").format(time)
-        return id + "|" + day.joinToString(".") + "|" + date + "|" + task.name +
+        val date = SimpleDateFormat("HH:mm:ss").format(time.time)
+        val stringy = id + "|" + day.joinToString(".") + "|" + date + "|" + task.name +
                 "|" + ringtone.toString() + "|" + volume.toString() + "|" + vibration.toString() +
                 "|" + snooze.toString() + "|" + limit.toString() + "|" + active.toString()
+        return stringy
     }
 }
 

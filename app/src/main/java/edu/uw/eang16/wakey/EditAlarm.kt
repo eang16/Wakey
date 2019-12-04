@@ -30,6 +30,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileReader
+import java.io.FileWriter
 
 class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
@@ -210,13 +211,24 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         if (!file.exists()) { file.createNewFile() }
 
         val alarmsText = FileReader(file).readLines()
-        var exists = -1
+        var index = -1
         for ((i, line) in alarmsText.withIndex()) {
-            if (line.startsWith(data.id)) { exists = i }
+            if (line.startsWith(data.id)) { index = i }
         }
-        if (exists == -1) {
-            exists = alarmsText.size
+
+        // Index is -1 if the alarm already exists, and this is an update
+        val stringArray = alarmsText.toMutableList()
+        val stringRepresentation = data.toString()
+        if (index == -1) {
+            stringArray.add(stringRepresentation)
+        } else {
+            stringArray[index] = stringRepresentation
         }
+        FileWriter(file, false).apply {
+            write(stringArray.joinToString("\n"))
+            close()
+        }
+        return true
     }
 
     // for snooze duration
