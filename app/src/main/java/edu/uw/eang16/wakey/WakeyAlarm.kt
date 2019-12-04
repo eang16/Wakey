@@ -22,7 +22,7 @@ interface WakeyAlarm {
     }
 
     // Snoozes the alarm by unsetting it, decrementing the snooze counter, and then continuing
-    fun snoozeAlarm(alarmData: AlarmData, context: Context) {
+    fun snoozeAlarm(alarmData: AlarmData, context: Context): Boolean {
         if (alarmData.limit > 0 && alarmData.snooze != 0) {
             stopAlarm(alarmData, context)
             alarmData.limit--
@@ -32,8 +32,10 @@ interface WakeyAlarm {
                 Calendar.getInstance().timeInMillis +  SNOOZES[alarmData.snooze] * 60 * 1000,
                 AlarmHelper.getIntent(alarmData, context)
             )
+            return true
         } else {
             Log.e("msg", "No snoozes left OR snooze time is 0")
+            return false
         }
 
     }

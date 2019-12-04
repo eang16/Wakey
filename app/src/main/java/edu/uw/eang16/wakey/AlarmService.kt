@@ -51,7 +51,7 @@ class AlarmService : Service() {
                 Task.MATH -> Intent(context, MathSolver::class.java)
                 Task.SCAN -> Intent(context, ScanActivity::class.java)
                 Task.SHAKE -> Intent(context, ShakeServiceActivity::class.java)
-                Task.GAME -> Intent(context, NoTask::class.java)
+                Task.GAME -> Intent(context, PuzzleActivity::class.java)
                 else -> Intent(context, NoTask::class.java)
             }
         intent.putExtra("data", data)
