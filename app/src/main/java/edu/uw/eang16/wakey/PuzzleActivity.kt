@@ -13,7 +13,7 @@ import java.util.*
 import kotlin.concurrent.schedule
 import kotlin.random.Random
 
-class PuzzleActivity: AppCompatActivity() {
+class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
 
     var key = mutableListOf<Int>()
 
@@ -24,6 +24,7 @@ class PuzzleActivity: AppCompatActivity() {
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
                               button7, button8, button9)
+        val alarmManager = AlarmHelper.getAlarmManager(this)
 
         for(btn in buttons) {
             btn.setOnClickListener {
@@ -87,5 +88,24 @@ class PuzzleActivity: AppCompatActivity() {
         for (btn in btns) {
             btn.background = getResources().getDrawable(R.drawable.circle)
         }
+    }
+
+    override fun startAlarm(alarmData: AlarmData) {
+
+    }
+
+    // When the alarm wakes up after a snooze, this resumes the ringtone and alarm
+    override fun resumeAlarm(alarmData: AlarmData) {
+
+    }
+
+    // Keeps track of how many snoozes are available and disables snooze if none are left
+    override fun snoozeAlarm(alarmData: AlarmData) {
+        val snoozeTimeInMinutes = SNOOZE_TIMES[alarmData.snooze]
+    }
+
+    // Upon successfully completing the task, stops the alarm
+    override fun stopAlarm() {
+
     }
 }
