@@ -2,4 +2,6 @@
     <string name="app_name">Wakey</string>
     <string name="action_settings">Settings</string>
     <string name="editalarm">Edit Alarm</string>
+    <string name="math">Math Solver</string>
+    <string name="puzzle">Puzzle Solver</string>
 </resources>
