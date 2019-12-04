@@ -61,8 +61,10 @@ class MainActivity : AppCompatActivity() {
         val rawText = FileReader(file).readText()
         val rawList = rawText.split("\n")
         for (i in rawList) {
-            val data = parseAlarmData(i)
-            aList.add(data)
+            if (i.isNotEmpty() && i.isNotBlank()) {
+                val data = parseAlarmData(i)
+                aList.add(data)
+            }
         }
         aList.sort()
         val adapter = AlarmAdapter(applicationContext, aList)
