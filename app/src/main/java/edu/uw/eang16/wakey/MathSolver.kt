@@ -24,7 +24,7 @@ enum class Operator {
     abstract fun doMath(t: Int, u:Int): Int
 }
 
-class MathSolver: AppCompatActivity() {
+class MathSolver: AppCompatActivity(), WakeyAlarm {
 
     var answer: Int = 0
     val operator = listOf(Operator.PLUS, Operator.MINUS, Operator.MULTIPLY, Operator.DIVIDE)
@@ -33,11 +33,13 @@ class MathSolver: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_math_solver)
         problem.text = makeProblem()
+        val data = intent!!.getParcelableExtra("data") as AlarmData
+        startAlarm(data,this)
 
         snooze.setOnClickListener {
             if (input_answer.text.toString() === "$answer") {
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-                startActivity(Intent(this, MainActivity::class.java))
+                stopAlarm(data,this)
             } else {
                 Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
             }

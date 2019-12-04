@@ -20,11 +20,11 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_solver)
-
+        val data = intent!!.getParcelableExtra("data") as AlarmData
+        startAlarm(data, this)
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
                               button7, button8, button9)
-        val alarmManager = AlarmHelper.getAlarmManager(this)
 
         for(btn in buttons) {
             btn.setOnClickListener {
@@ -53,6 +53,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
             }
             if(check) {
                 Toast.makeText(this, "Correct pattern!", Toast.LENGTH_SHORT).show()
+                stopAlarm(data, this)
             } else {
                 Toast.makeText(this, "Incorrect pattern. Try again!", Toast.LENGTH_SHORT).show()
                 clear(buttons)
@@ -90,22 +91,4 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
         }
     }
 
-    override fun startAlarm(alarmData: AlarmData) {
-
-    }
-
-    // When the alarm wakes up after a snooze, this resumes the ringtone and alarm
-    override fun resumeAlarm(alarmData: AlarmData) {
-
-    }
-
-    // Keeps track of how many snoozes are available and disables snooze if none are left
-    override fun snoozeAlarm(alarmData: AlarmData) {
-        val snoozeTimeInMinutes = SNOOZE_TIMES[alarmData.snooze]
-    }
-
-    // Upon successfully completing the task, stops the alarm
-    override fun stopAlarm() {
-
-    }
 }
