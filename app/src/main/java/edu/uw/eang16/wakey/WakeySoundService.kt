@@ -1,9 +1,6 @@
 package edu.uw.eang16.wakey
 
-import android.app.Notification
-import android.app.NotificationChannel
-import android.app.NotificationManager
-import android.app.Service
+import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.media.MediaPlayer
@@ -52,11 +49,18 @@ class WakeySoundService: Service() {
 
             //TODO: Make an intent which returns to the currently playing alarm (singleTop?)
             val intent = Intent(context, MainActivity::class.java)
+            val pendingIntent = TaskStackBuilder.create(context).run {
+                // Add the intent, which inflates the back stack
+                addNextIntentWithParentStack(intent)
+                // Get the PendingIntent containing the entire back stack
+                getPendingIntent(0, PendingIntent.FLAG_UPDATE_CURRENT)
+            }
 
 
             var builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Wakey")
+                .setContentIntent(pendingIntent)
                 .setContentText("Currently sounding an alarm!")
                 .setAutoCancel(true)
                 .build()
@@ -72,10 +76,10 @@ class WakeySoundService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.e("msg", "Music should be playing right about now")
         data = intent!!.getParcelableExtra("data") as AlarmData
-        startForeground(data.id.toInt(), buildNotification(applicationContext))
+        startForeground(0, buildNotification(applicationContext))
         ringtone = RingtoneManager.getRingtone(applicationContext, data.ringtone)
         ringtone.play()
-        return super.onStartCommand(intent, flags, startId)
+        return START_NOT_STICKY
     }
 
     override fun onDestroy() {

@@ -2,6 +2,7 @@ package edu.uw.eang16.wakey
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import kotlinx.android.synthetic.main.activity_no_task.*
 
 class NoTask : AppCompatActivity(), WakeyAlarm {
@@ -14,6 +15,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
 
         snoozeBtn.setOnClickListener {
             if (snoozeAlarm(data, it.context)) {
+                Log.e("msg", "Snooze button pressed")
                 finish()
             }
         }
