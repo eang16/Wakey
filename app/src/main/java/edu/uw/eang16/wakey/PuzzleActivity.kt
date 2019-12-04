@@ -21,8 +21,6 @@ class PuzzleActivity: AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_solver)
 
-
-
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
                               button7, button8, button9)
