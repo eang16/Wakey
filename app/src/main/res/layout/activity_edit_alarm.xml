@@ -59,89 +59,112 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
 
-    <Button
-        android:id="@+id/sunBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Sun"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toLeftOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintStart_toStartOf="parent"
+        android:id="@+id/buttonWrapper">
+        <ToggleButton
+            android:tag="0"
+            android:id="@+id/sunBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Sun"
+            android:textOff="Sun"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/monBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Mon"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/sunBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="1"
+            android:id="@+id/monBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Mon"
+            android:textOff="Mon"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/sunBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/tueBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Tue"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/monBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="2"
+            android:id="@+id/tueBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Tue"
+            android:textOff="Tue"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/monBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/wedBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Wed"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/tueBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="3"
+            android:id="@+id/wedBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Wed"
+            android:textOff="Wed"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/tueBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/thuBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Thu"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/wedBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="4"
+            android:id="@+id/thuBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Thu"
+            android:textOff="Thu"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/wedBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/friBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Fri"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/thuBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="5"
+            android:id="@+id/friBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Fri"
+            android:textOff="Fri"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/thuBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
 
-    <Button
-        android:id="@+id/satBtn"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:background="@drawable/circle"
-        android:text="Sat"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toRightOf="@id/friBtn"
-        app:layout_constraintTop_toBottomOf="@id/dayTitle"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"/>
+        <ToggleButton
+            android:tag="6"
+            android:id="@+id/satBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/circle"
+            android:textOn="Sat"
+            android:textOff="Sat"
+            android:checked="true"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toRightOf="@id/friBtn"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/ringtoneTitle"
@@ -149,7 +172,7 @@
         android:layout_height="wrap_content"
         android:text="Ringtone"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/sunBtn"
+        app:layout_constraintTop_toBottomOf="@id/buttonWrapper"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
@@ -181,7 +204,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/satBtn"
+        app:layout_constraintRight_toRightOf="@id/buttonWrapper"
         app:layout_constraintTop_toBottomOf="@id/volumeTitle"
         android:max="100"
         android:layout_marginStart="8dp"
@@ -204,7 +227,7 @@
         android:max="100"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="@id/satBtn"
+        app:layout_constraintRight_toRightOf="@id/buttonWrapper"
         app:layout_constraintTop_toBottomOf="@id/vibrationTitle"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"/>

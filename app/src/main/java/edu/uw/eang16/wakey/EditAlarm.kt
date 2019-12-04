@@ -10,8 +10,6 @@ import android.media.RingtoneManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import kotlinx.android.synthetic.main.activity_edit_alarm.*
 import kotlinx.android.synthetic.main.alarm_list.*
 import java.text.SimpleDateFormat
@@ -24,7 +22,9 @@ import android.net.Uri
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.widget.SeekBar
+import android.graphics.Color
+import android.graphics.ColorSpace
+import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -91,7 +91,8 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         }
 
         // ringtone picker
-        uriAlarm = RingtoneManager.getDefaultUri(TYPE_ALARM)
+        ringtone.text = RingtoneManager.getRingtone(applicationContext, data.ringtone).getTitle(this)
+        uriAlarm = data.ringtone
         ringtone.setOnClickListener {
             ringTone = RingtoneManager.getRingtone(applicationContext, uriAlarm)
             val intent = Intent(RingtoneManager.ACTION_RINGTONE_PICKER)
@@ -102,6 +103,25 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
                     ringTone.stop()
                 }
                 ringTone.play()
+            }
+        }
+
+        // Day buttons
+        for (i in 0 until buttonWrapper.childCount) {
+            val btn = buttonWrapper.getChildAt(i) as ToggleButton
+            btn.isChecked = data.day[i]
+            if (btn.isChecked) {
+                btn.setBackgroundResource(R.drawable.circle_selected)
+            } else {
+                btn.setBackgroundResource(R.drawable.circle)
+            }
+            btn.setOnCheckedChangeListener { buttonView, isChecked ->
+                data.day[(btn.tag as String).toInt()] = isChecked
+                if (isChecked) {
+                    btn.setBackgroundResource(R.drawable.circle_selected)
+                } else {
+                    btn.setBackgroundResource(R.drawable.circle)
+                }
             }
         }
 
@@ -133,12 +153,12 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     }
 
     // for ringtone
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, ddata: Intent?) {
         if (requestCode == 1 && resultCode == Activity.RESULT_OK) {
-            val uri = data!!.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
+            val uri = ddata!!.getParcelableExtra<Uri>(RingtoneManager.EXTRA_RINGTONE_PICKED_URI)
 
             if (uri != null) {
-                //CTRLF
+                data.ringtone = uri
                 ringtone.text = RingtoneManager.getRingtone(applicationContext, uri).getTitle(this)
             }
         }
