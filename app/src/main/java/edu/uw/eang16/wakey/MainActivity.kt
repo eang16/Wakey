@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity() {
             val data = parseAlarmData(i)
             aList.add(data)
         }
+        aList.sort()
         val adapter = AlarmAdapter(applicationContext, aList)
         alarmList.adapter = adapter
 
