@@ -30,7 +30,18 @@ interface WakeyAlarm {
             AlarmHelper.getAlarmManager(context).setExact(
                 AlarmManager.RTC_WAKEUP,
                 Calendar.getInstance().timeInMillis +  SNOOZES[alarmData.snooze] * 60 * 1000,
-                AlarmHelper.getIntent(alarmData, context)
+                AlarmHelper.getIntent(AlarmData(
+                    alarmData.id,
+                    alarmData.day,
+                    alarmData.time,
+                    alarmData.task,
+                    alarmData.ringtone,
+                    alarmData.volume,
+                    alarmData.vibration,
+                    alarmData.snooze,
+                    alarmData.limit - 1,
+                    alarmData.active
+                ), context)
             )
             return true
         } else {
