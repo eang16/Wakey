@@ -103,16 +103,19 @@ class MainActivity : AppCompatActivity() {
             } else {
                 holder = view.tag as ViewHolder
             }
+            holder.time!!.tag = alarm
+            holder.active!!.tag = alarm
             holder.time!!.text = SimpleDateFormat("hh:mm a").format(alarm.time.time)
             holder.active!!.isChecked = alarm.active
             holder.active!!.setOnCheckedChangeListener { buttonView, isChecked ->
-                alarm.active = isChecked
-                updateAlarmData(alarm)
+                val data = holder.active!!.tag as AlarmData
+                data.active = isChecked
                 if (isChecked) {
-                    activateAlarm(alarm, context)
+                    activateAlarm(data, context)
                 } else {
-                    deactivateAlarm(alarm, context)
+                    deactivateAlarm(data, context)
                 }
+                updateAlarmData(data)
             }
 
             for (i in 0 until holder.days!!.childCount) {
@@ -129,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                 context.startActivity(intent)
             }
 
-            holder.time!!.tag = alarm
+
             view!!.setOnClickListener {
                 val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
                 val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)

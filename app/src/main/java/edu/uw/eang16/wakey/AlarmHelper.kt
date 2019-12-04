@@ -22,7 +22,7 @@ class AlarmHelper {
             var intent = Intent(context, AlarmReceiver::class.java).apply {
                 putExtra("id", data.id)
             }
-            return PendingIntent.getService(context, data.id.toInt(), intent, 0)
+            return PendingIntent.getService(context, data.id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
     }
 }
@@ -42,6 +42,8 @@ fun activateAlarm(data: AlarmData, context: Context) {
 
 fun deactivateAlarm(data: AlarmData, context: Context) {
     val am = AlarmHelper.getAlarmManager(context)
-    am.cancel(AlarmHelper.getIntent(data, context))
+    val pd = AlarmHelper.getIntent(data, context)
+    pd.cancel()
+    am.cancel(pd)
     Log.e("msg", "Alarm Canceled: " + data.id)
 }

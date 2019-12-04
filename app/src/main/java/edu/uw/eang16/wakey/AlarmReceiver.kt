@@ -28,7 +28,6 @@ class AlarmReceiver : Service() {
             }
 
             val curDay = SimpleDateFormat("EEEE", Locale.ENGLISH).format(Calendar.getInstance().time)
-            Log.e("msg", curDay)
             for ((index, day) in Days.withIndex()) {
                 if (data.day[index] && curDay == day) {
                     soundAlarm(applicationContext, data)
@@ -40,6 +39,6 @@ class AlarmReceiver : Service() {
 
 
     fun soundAlarm(context: Context, data: AlarmData) {
-        Log.e("msg", "wow, you actually did it")
+        Log.e("msg", data.id + " Sounding")
     }
 }
