@@ -103,7 +103,11 @@ class MainActivity : AppCompatActivity() {
             }
             holder.time!!.text = SimpleDateFormat("hh:mm a").format(alarm.time.time)
             holder.active!!.isChecked = alarm.active
-            holder.time!!.tag = alarm
+            holder.active!!.setOnCheckedChangeListener { buttonView, isChecked ->
+                alarm.active = isChecked
+                updateAlarm(alarm)
+            }
+
             for (i in 0 until holder.days!!.childCount) {
                 val tv = holder.days!!.getChildAt(i) as TextView
                 if (alarm.day[i]) {
@@ -118,6 +122,7 @@ class MainActivity : AppCompatActivity() {
                 context.startActivity(intent)
             }
 
+            holder.time!!.tag = alarm
             view!!.setOnClickListener {
                 val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
                 val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)
@@ -125,6 +130,30 @@ class MainActivity : AppCompatActivity() {
             }
 
             return view!!
+        }
+
+        fun updateAlarm(data: AlarmData) {
+            if (!context.filesDir.exists()) { context.filesDir.mkdirs() }
+            val file = File(context.filesDir, "alarms")
+            if (!file.exists()) { file.createNewFile() }
+
+            val alarmsText = FileReader(file).readLines()
+            var index = -1
+            for ((i, line) in alarmsText.withIndex()) {
+                if (line.startsWith(data.id)) { index = i }
+            }
+
+            // Index is -1 if the alarm already exists, and this is an update
+            val stringArray = alarmsText.toMutableList()
+            if (index == -1) {
+                Log.e("msg", "The thing you're trying to delete doesn't exist")
+            } else {
+                stringArray[index] = data.toString()
+            }
+            FileWriter(file, false).apply {
+                write(stringArray.joinToString("\n"))
+                close()
+            }
         }
 
         fun deleteAlarm(data: AlarmData) {
