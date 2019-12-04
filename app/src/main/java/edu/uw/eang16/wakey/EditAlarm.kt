@@ -166,6 +166,19 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             }
         }
 
+        //test Puzzle
+        puzzlebtn.setOnClickListener {
+            val intent = Intent(this, PuzzleActivity::class.java)
+            intent.putExtra("data", data)
+            startActivity(intent)
+        }
+
+        //test Math
+        mathbtn.setOnClickListener {
+            val intent = Intent(this, MathSolver::class.java)
+            intent.putExtra("data", data)
+            startActivity(intent)
+        }
     }
 
     // for task

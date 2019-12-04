@@ -20,7 +20,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_solver)
-        val data = intent!!.getParcelableExtra("data") as AlarmData
+        val data = this.intent!!.getParcelableExtra("data") as AlarmData
         startAlarm(data, this)
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
