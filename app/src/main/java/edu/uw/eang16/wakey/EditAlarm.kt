@@ -65,7 +65,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             var vibration = 100
             var snooze = 3
             var limit = 3
-            var active = false
+            var active = true
             data = AlarmData(id, day, dtime, task, ringtone, volume, vibration, snooze, limit, active)
         }
         time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
@@ -228,6 +228,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             write(stringArray.joinToString("\n"))
             close()
         }
+        activateAlarm(data, applicationContext)
         return true
     }
 
