@@ -28,6 +28,8 @@ import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import java.io.File
+import java.io.FileReader
 
 class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
@@ -53,7 +55,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         if (intent.hasExtra("data")) {
             data = intent.extras!!["data"] as AlarmData
         } else {
-            var id = Random().nextInt()
+            var id = Random().nextInt().toString()
             var day = booleanArrayOf(false, false, false, false, false, false, false)
             var dtime = Calendar.getInstance()
             var task = Task.NONE
@@ -159,6 +161,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
                 startActivity(intent)
             }
         }
+
     }
 
     // for task
@@ -196,8 +199,23 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         return when (item.itemId) {
-            R.id.action_save -> true
+            R.id.action_save -> saveAlarm()
             else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+    fun saveAlarm(): Boolean {
+        if (!filesDir.exists()) { filesDir.mkdirs() }
+        val file = File(filesDir, "alarms")
+        if (!file.exists()) { file.createNewFile() }
+
+        val alarmsText = FileReader(file).readLines()
+        var exists = -1
+        for ((i, line) in alarmsText.withIndex()) {
+            if (line.startsWith(data.id)) { exists = i }
+        }
+        if (exists == -1) {
+            exists = alarmsText.size
         }
     }
 
