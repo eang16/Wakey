@@ -23,68 +23,74 @@
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginEnd="16dp"/>
 
-    <TextView
-        android:id="@+id/sun"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/days"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S"
         app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toLeftOf="parent"
-        android:layout_marginStart="16dp"/>
+        app:layout_constraintStart_toStartOf="parent">
+        <TextView
+            android:id="@+id/sun"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginStart="16dp"/>
 
-    <TextView
-        android:id="@+id/mon"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="M"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/sun"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/mon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="M"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/sun"
+            android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/tue"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="T"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/mon"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/tue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/mon"
+            android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/wed"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="W"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/tue"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/wed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="W"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/tue"
+            android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/thu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="T"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/wed"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/thu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="T"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/wed"
+            android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/fri"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="F"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/thu"
-        android:layout_marginStart="8dp"/>
+        <TextView
+            android:id="@+id/fri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="F"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/thu"
+            android:layout_marginStart="8dp"/>
 
-    <TextView
-        android:id="@+id/sat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="S"
-        app:layout_constraintTop_toBottomOf="@id/alarmTime"
-        app:layout_constraintLeft_toRightOf="@id/fri"
-        android:layout_marginStart="8dp"/>
-
+        <TextView
+            android:id="@+id/sat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="S"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toRightOf="@id/fri"
+            android:layout_marginStart="8dp"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
