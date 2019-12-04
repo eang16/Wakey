@@ -39,7 +39,7 @@ class MainActivity : AppCompatActivity() {
         aList = mutableListOf()
 
         fab.setOnClickListener { view ->
-            val intent = Intent(this, PuzzleActivity::class.java)
+            val intent = Intent(this, EditAlarm::class.java)
             startActivity(intent)
         }
     }
