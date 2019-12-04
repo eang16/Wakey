@@ -121,7 +121,7 @@ class MainActivity : AppCompatActivity() {
             for (i in 0 until holder.days!!.childCount) {
                 val tv = holder.days!!.getChildAt(i) as TextView
                 if (alarm.day[i]) {
-                    tv.setTextColor(Color.rgb(0, 191, 255))
+                    tv.setTextColor(Color.rgb(187, 134, 252))
                 } else {
                     tv.setTextColor(Color.LTGRAY)
                 }
