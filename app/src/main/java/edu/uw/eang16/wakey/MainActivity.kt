@@ -71,15 +71,6 @@ class MainActivity : AppCompatActivity() {
         aList.sort()
         val adapter = AlarmAdapter(applicationContext, aList)
         alarmList.adapter = adapter
-
-        if (aList.isNotEmpty()) {
-            nextAlarmTitle.visibility = View.INVISIBLE
-            nextAlarmContent.visibility = View.INVISIBLE
-        } else {
-            nextAlarmTitle.visibility = View.VISIBLE
-            nextAlarmContent.visibility = View.VISIBLE
-        }
-
     }
 
     private class ViewHolder(var delete: ImageView? = null, var time: TextView? = null, var active: Switch? = null, var days: ConstraintLayout? = null)
