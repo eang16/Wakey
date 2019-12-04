@@ -50,7 +50,7 @@ class AlarmService : Service() {
                 Task.NONE -> Intent(context, NoTask::class.java)
                 Task.MATH -> Intent(context, MathSolver::class.java)
                 Task.SCAN -> Intent(context, ScanActivity::class.java)
-                Task.SHAKE -> Intent(context, ShakeServiceActivity::class.java)
+                Task.SHAKE -> Intent(context, ShakeActivity::class.java)
                 Task.GAME -> Intent(context, PuzzleActivity::class.java)
                 else -> Intent(context, NoTask::class.java)
             }

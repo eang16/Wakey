@@ -16,7 +16,7 @@
         <activity android:name=".QRBarcodeList" />
         <activity android:name=".Scanner" />
         <activity android:name=".ScanActivity" />
-        <activity android:name=".ShakeServiceActivity" />
+        <activity android:name=".ShakeActivity" />
 
         <service
             android:name=".ShakeService"
