@@ -64,8 +64,13 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
                 answer *= temp
                 result += " x ${temp}"
             } else {
-                answer /= temp
-                result += " / ${temp}"
+                if (answer % temp === 0) {
+                    answer /= temp
+                    result += " / ${temp}"
+                } else {
+                    answer += temp
+                    result += " + ${temp}"
+                }
             }
         }
         return result
