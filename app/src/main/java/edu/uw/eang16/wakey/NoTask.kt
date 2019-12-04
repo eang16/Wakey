@@ -20,6 +20,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
 
         stopBtn.setOnClickListener {
             stopAlarm(data, it.context)
+            finish()
         }
     }
 }

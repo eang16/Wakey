@@ -30,16 +30,12 @@ class AlarmHelper {
 fun activateAlarm(data: AlarmData, context: Context) {
     val am = AlarmHelper.getAlarmManager(context)
     deactivateAlarm(data, context)
-    Log.e("msg", data.toString())
-    Log.e("msg", data.time.toString() + "|" + data.time.timeInMillis)
     am.setRepeating(
         AlarmManager.RTC_WAKEUP,
         data.time.timeInMillis,
         86400000,
         AlarmHelper.getIntent(data, context)
     )
-
-    Log.e("msg", "Alarm set: " + data.id)
 }
 
 fun deactivateAlarm(data: AlarmData, context: Context) {
@@ -47,5 +43,4 @@ fun deactivateAlarm(data: AlarmData, context: Context) {
     val pd = AlarmHelper.getIntent(data, context)
     pd.cancel()
     am.cancel(pd)
-    Log.e("msg", "Alarm Canceled: " + data.id)
 }
