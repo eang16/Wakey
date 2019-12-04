@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
+import android.graphics.Color
 import android.os.Parcelable
 import android.util.Log
 import android.view.*
@@ -32,7 +33,6 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         
         aList = mutableListOf()
-        updateList()
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditAlarm::class.java)
@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun updateList() {
+        aList.clear()
         if (!filesDir.exists()) {
             filesDir.mkdirs()
         }
@@ -87,6 +88,12 @@ class AlarmAdapter(context: Context, objects: List<AlarmData>):
         //Todo: set the day color to be proper
         holder.active!!.isChecked = alarm.active
         holder.time!!.tag = alarm
+        for (i in 0 until holder.days!!.childCount) {
+            val tv = holder.days!!.getChildAt(i) as TextView
+            if (alarm.day[i]) {
+                tv.setTextColor(Color.rgb(0,191,255))
+            }
+        }
 
         view!!.setOnClickListener {
             val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
