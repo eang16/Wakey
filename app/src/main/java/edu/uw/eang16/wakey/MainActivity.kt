@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
             if (i.isNotEmpty() && i.isNotBlank()) {
                 val data = parseAlarmData(i)
                 aList.add(data)
+                if (data.active) {
+                    activateAlarm(data, applicationContext)
+                }
             }
         }
         aList.sort()
@@ -76,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             nextAlarmTitle.visibility = View.VISIBLE
             nextAlarmContent.visibility = View.VISIBLE
-            nextAlarmTitle.text = "No upcoming alarms"
         }
     }
 
@@ -105,7 +107,12 @@ class MainActivity : AppCompatActivity() {
             holder.active!!.isChecked = alarm.active
             holder.active!!.setOnCheckedChangeListener { buttonView, isChecked ->
                 alarm.active = isChecked
-                updateAlarm(alarm)
+                updateAlarmData(alarm)
+                if (isChecked) {
+                    activateAlarm(alarm, context)
+                } else {
+                    deactivateAlarm(alarm, context)
+                }
             }
 
             for (i in 0 until holder.days!!.childCount) {
@@ -132,7 +139,7 @@ class MainActivity : AppCompatActivity() {
             return view!!
         }
 
-        fun updateAlarm(data: AlarmData) {
+        fun updateAlarmData(data: AlarmData) {
             if (!context.filesDir.exists()) { context.filesDir.mkdirs() }
             val file = File(context.filesDir, "alarms")
             if (!file.exists()) { file.createNewFile() }
@@ -143,10 +150,9 @@ class MainActivity : AppCompatActivity() {
                 if (line.startsWith(data.id)) { index = i }
             }
 
-            // Index is -1 if the alarm already exists, and this is an update
             val stringArray = alarmsText.toMutableList()
             if (index == -1) {
-                Log.e("msg", "The thing you're trying to delete doesn't exist")
+                Log.e("msg", "The thing you're trying to UPDATE doesn't exist")
             } else {
                 stringArray[index] = data.toString()
             }
@@ -167,10 +173,10 @@ class MainActivity : AppCompatActivity() {
                 if (line.startsWith(data.id)) { index = i }
             }
 
-            // Index is -1 if the alarm already exists, and this is an update
+            // Index is -1 if the alarm doesn't exist
             val stringArray = alarmsText.toMutableList()
             if (index == -1) {
-                Log.e("msg", "The thing you're trying to delete doesn't exist")
+                Log.e("msg", "The thing you're trying to DELETE doesn't exist")
             } else {
                 stringArray.removeAt(index)
             }
@@ -178,6 +184,8 @@ class MainActivity : AppCompatActivity() {
                 write(stringArray.joinToString("\n"))
                 close()
             }
+
+            deactivateAlarm(data, context)
         }
     }
 }

@@ -36,11 +36,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <!--
         <service
-            android:name=".AlarmService"
-            android:enabled="true" />
-        <receiver android:name=".AlarmReceiver" />-->
+            android:name=".AlarmReceiver"
+            ></service>
     </application>
 
 </manifest>
