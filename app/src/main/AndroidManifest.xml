@@ -23,6 +23,8 @@
             android:enabled="true"
             android:exported="true" />
 
+        <service android:name=".WakeySoundService"></service>
+
         <activity
             android:name=".EditAlarm"
             android:label="@string/editalarm"
