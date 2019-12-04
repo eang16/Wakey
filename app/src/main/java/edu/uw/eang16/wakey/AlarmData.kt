@@ -26,6 +26,8 @@ data class AlarmData(var id: String, var day: BooleanArray, var time: Calendar, 
 
 enum class Task { NONE, MATH, SCAN, SHAKE, GAME, RANDOM }
 
+val Days = arrayOf("Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday")
+
 fun parseAlarmData(line: String): AlarmData {
     val sec = line.split("|")
     var id = sec[0].toString()

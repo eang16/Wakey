@@ -64,6 +64,9 @@ class MainActivity : AppCompatActivity() {
             if (i.isNotEmpty() && i.isNotBlank()) {
                 val data = parseAlarmData(i)
                 aList.add(data)
+                if (data.active) {
+                    activateAlarm(data, applicationContext)
+                }
             }
         }
         aList.sort()
@@ -76,7 +79,6 @@ class MainActivity : AppCompatActivity() {
         } else {
             nextAlarmTitle.visibility = View.VISIBLE
             nextAlarmContent.visibility = View.VISIBLE
-            nextAlarmTitle.text = "No upcoming alarms"
         }
     }
 
@@ -101,11 +103,19 @@ class MainActivity : AppCompatActivity() {
             } else {
                 holder = view.tag as ViewHolder
             }
+            holder.time!!.tag = alarm
+            holder.active!!.tag = alarm
             holder.time!!.text = SimpleDateFormat("hh:mm a").format(alarm.time.time)
             holder.active!!.isChecked = alarm.active
             holder.active!!.setOnCheckedChangeListener { buttonView, isChecked ->
-                alarm.active = isChecked
-                updateAlarm(alarm)
+                val data = holder.active!!.tag as AlarmData
+                data.active = isChecked
+                if (isChecked) {
+                    activateAlarm(data, context)
+                } else {
+                    deactivateAlarm(data, context)
+                }
+                updateAlarmData(data)
             }
 
             for (i in 0 until holder.days!!.childCount) {
@@ -122,7 +132,7 @@ class MainActivity : AppCompatActivity() {
                 context.startActivity(intent)
             }
 
-            holder.time!!.tag = alarm
+
             view!!.setOnClickListener {
                 val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
                 val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)
@@ -132,7 +142,7 @@ class MainActivity : AppCompatActivity() {
             return view!!
         }
 
-        fun updateAlarm(data: AlarmData) {
+        fun updateAlarmData(data: AlarmData) {
             if (!context.filesDir.exists()) { context.filesDir.mkdirs() }
             val file = File(context.filesDir, "alarms")
             if (!file.exists()) { file.createNewFile() }
@@ -143,10 +153,9 @@ class MainActivity : AppCompatActivity() {
                 if (line.startsWith(data.id)) { index = i }
             }
 
-            // Index is -1 if the alarm already exists, and this is an update
             val stringArray = alarmsText.toMutableList()
             if (index == -1) {
-                Log.e("msg", "The thing you're trying to delete doesn't exist")
+                Log.e("msg", "The thing you're trying to UPDATE doesn't exist")
             } else {
                 stringArray[index] = data.toString()
             }
@@ -167,10 +176,10 @@ class MainActivity : AppCompatActivity() {
                 if (line.startsWith(data.id)) { index = i }
             }
 
-            // Index is -1 if the alarm already exists, and this is an update
+            // Index is -1 if the alarm doesn't exist
             val stringArray = alarmsText.toMutableList()
             if (index == -1) {
-                Log.e("msg", "The thing you're trying to delete doesn't exist")
+                Log.e("msg", "The thing you're trying to DELETE doesn't exist")
             } else {
                 stringArray.removeAt(index)
             }
@@ -178,6 +187,8 @@ class MainActivity : AppCompatActivity() {
                 write(stringArray.joinToString("\n"))
                 close()
             }
+
+            deactivateAlarm(data, context)
         }
     }
 }
