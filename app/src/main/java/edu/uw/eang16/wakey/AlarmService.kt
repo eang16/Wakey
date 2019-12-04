@@ -1,7 +1,6 @@
 package edu.uw.eang16.wakey
 
 import android.app.Service
-import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.os.IBinder
@@ -28,7 +27,7 @@ class AlarmService : Service() {
             }
 
             val curDay = SimpleDateFormat("EEEE", Locale.ENGLISH).format(Calendar.getInstance().time)
-            for ((index, day) in Days.withIndex()) {
+            for ((index, day) in DAYS.withIndex()) {
                 if (data.day[index] && curDay == day) {
                     soundAlarm(applicationContext, data)
                 }
