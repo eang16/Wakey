@@ -29,6 +29,17 @@
             android:name=".EditAlarm"
             android:label="@string/editalarm"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".MathSolver"
+            android:label="@string/math"
+            android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".PuzzleActivity"
+            android:label="@string/puzzle"
+            android:parentActivityName=".MainActivity" />
+
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
