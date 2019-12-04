@@ -128,14 +128,16 @@ class MainActivity : AppCompatActivity() {
             }
             holder.delete!!.setOnClickListener {
                 deleteAlarm(alarm)
-                val intent = Intent(context, MainActivity::class.java)
-                context.startActivity(intent)
+                val intent = Intent(context.applicationContext, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.applicationContext.startActivity(intent)
             }
 
 
             view!!.setOnClickListener {
                 val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
                 val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
 
