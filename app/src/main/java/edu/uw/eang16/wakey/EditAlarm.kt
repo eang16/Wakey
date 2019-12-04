@@ -58,7 +58,10 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         } else {
             var id = Random().nextInt().toString()
             var day = booleanArrayOf(false, false, false, false, false, false, false)
-            var dtime = Calendar.getInstance()
+            var dtime = Calendar.getInstance().apply {
+                set(Calendar.SECOND, 0)
+                set(Calendar.MILLISECOND, 0)
+            }
             var task = Task.NONE
             var ringtone = RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_RINGTONE)
             var volume = 100

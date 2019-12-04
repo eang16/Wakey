@@ -46,7 +46,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        Log.e("msg", "Application Starting")
         updateList()
     }
 
