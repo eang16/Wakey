@@ -16,6 +16,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.parcel.Parcelize
+import kotlinx.android.synthetic.main.content_main.*
 import java.io.File
 import java.io.FileReader
 import java.text.SimpleDateFormat
@@ -23,13 +24,15 @@ import java.util.*
 
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var aList: MutableList<AlarmData>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        updateAlarmList()
+        
+        aList = mutableListOf()
+        updateList()
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditAlarm::class.java)
@@ -39,10 +42,10 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        updateAlarmList()
+        updateList()
     }
 
-    fun updateAlarmList() {
+    fun updateList() {
         if (!filesDir.exists()) {
             filesDir.mkdirs()
         }
@@ -51,6 +54,12 @@ class MainActivity : AppCompatActivity() {
             file.createNewFile()
         }
         val rawText = FileReader(file).readText()
+        val rawList = rawText.split("\n")
+        for (i in rawList) {
+            aList.add(parseAlarmData(i))
+        }
+        val adapter = AlarmAdapter(applicationContext, aList)
+        alarmList.adapter = adapter
     }
 }
 
