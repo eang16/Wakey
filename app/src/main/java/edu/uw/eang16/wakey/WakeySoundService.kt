@@ -11,6 +11,7 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 
 class WakeySoundService: Service() {
@@ -50,6 +51,9 @@ class WakeySoundService: Service() {
             }
 
             //TODO: Make an intent which returns to the currently playing alarm (singleTop?)
+            val intent = Intent(context, MainActivity::class.java)
+
+
             var builder = NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.mipmap.ic_launcher_round)
                 .setContentTitle("Wakey")
@@ -66,6 +70,7 @@ class WakeySoundService: Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
+        Log.e("msg", "Music should be playing right about now")
         data = intent!!.getParcelableExtra("data") as AlarmData
         startForeground(data.id.toInt(), buildNotification(applicationContext))
         ringtone = RingtoneManager.getRingtone(applicationContext, data.ringtone)
@@ -75,7 +80,9 @@ class WakeySoundService: Service() {
 
     override fun onDestroy() {
         stopForeground(true)
-        ringtone.stop()
+        if (ringtone != null) {
+            ringtone.stop()
+        }
         super.onDestroy()
     }
 }
