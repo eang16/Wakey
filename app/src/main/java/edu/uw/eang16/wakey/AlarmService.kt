@@ -11,7 +11,7 @@ import java.io.FileReader
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AlarmReceiver : Service() {
+class AlarmService : Service() {
     private lateinit var data: AlarmData
 
     override fun onBind(intent: Intent?): IBinder? { return null }

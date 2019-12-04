@@ -19,7 +19,7 @@ class AlarmHelper {
         }
 
         fun getIntent(data: AlarmData, context: Context): PendingIntent {
-            var intent = Intent(context, AlarmReceiver::class.java).apply {
+            var intent = Intent(context, AlarmService::class.java).apply {
                 putExtra("id", data.id)
             }
             return PendingIntent.getService(context, data.id.toInt(), intent, PendingIntent.FLAG_UPDATE_CURRENT)
