@@ -24,6 +24,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.ColorSpace
+import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -31,6 +32,10 @@ import androidx.core.content.ContextCompat
 class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
             "Play a game", "Random")
+    val snoozeDurationItems = arrayOf("None", "1 minute", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes")
+    val snoozeLimitItems = arrayOf("None", "1 time", "2 times", "3 times", "4 times", "5 times")
+    var taskMap = hashMapOf<Task, Int>()
+
     private lateinit var ringTone: Ringtone
     private lateinit var uriAlarm: Uri
     private lateinit var data: AlarmData
@@ -38,6 +43,12 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_edit_alarm)
+        taskMap[Task.NONE] = 0
+        taskMap[Task.MATH] = 1
+        taskMap[Task.SCAN] = 2
+        taskMap[Task.SHAKE] = 3
+        taskMap[Task.GAME] = 4
+        taskMap[Task.RANDOM] = 5
 
         if (intent.hasExtra("data")) {
             data = intent.extras!!["data"] as AlarmData
@@ -49,7 +60,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             var ringtone = RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_RINGTONE)
             var volume = 100
             var vibration = 100
-            var snooze = 5
+            var snooze = 3
             var limit = 3
             var active = false
             data = AlarmData(id, day, dtime, task, ringtone, volume, vibration, snooze, limit, active)
@@ -79,6 +90,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, tasks)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         taskSpinner!!.adapter = arrayAdapter
+        taskSpinner.setSelection(taskMap[data.task]!!)
 
         //time picker
         time.setOnClickListener {
@@ -125,6 +137,10 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             }
         }
 
+        // Snooze duration and limit
+        snoozeDuration.text = snoozeDurationItems[data.snooze]
+        snoozeLimit.text = snoozeLimitItems[data.limit]
+
         //test shaker
         shakerbtn.setOnClickListener {
             val intent = Intent(this, ShakeServiceActivity::class.java)
@@ -147,6 +163,11 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     // for task
     override fun onItemSelected(arg0: AdapterView<*>, arg1: View, position: Int, id: Long) {
+        for (i in taskMap.keys) {
+            if (taskMap[i] == position) {
+                data.task = i
+            }
+        }
     }
     // for task
     override fun onNothingSelected(arg0: AdapterView<*>) {
@@ -182,12 +203,12 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     // for snooze duration
     fun snoozeDurationDialog(v: View) {
-        val snoozeDurationItems = arrayOf("None", "1 minute", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Snooze Duration")
-        val checkedItem = 0
+        val checkedItem = data.snooze
         builder.setSingleChoiceItems(snoozeDurationItems, checkedItem) { _, which ->
             snoozeDuration.text = snoozeDurationItems[which]
+            data.snooze = snoozeDurationItems.indexOf(snoozeDuration.text)
         }
         builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
         builder.show()
@@ -195,12 +216,12 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
     // for snooze limit
     fun snoozeLimitDialog(v: View) {
-        val snoozeLimitItems = arrayOf("None", "1 time", "2 times", "3 times", "4 times", "5 times")
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Snooze Limit")
-        val checkedItem = 0
+        val checkedItem = data.limit
         builder.setSingleChoiceItems(snoozeLimitItems, checkedItem) { _, which ->
             snoozeLimit.text = snoozeLimitItems[which]
+            data.limit = snoozeLimitItems.indexOf(snoozeLimit.text)
         }
         builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
         builder.show()

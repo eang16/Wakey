@@ -10,4 +10,4 @@ data class AlarmData(var id: Int, var day: BooleanArray, var time: Calendar, var
                      var ringtone: Uri, var volume: Int, var vibration: Int, var snooze: Int,
                      var limit: Int, var active: Boolean): Parcelable
 
-enum class Task { SHAKE, SCANNER, MATH, NONE }
+enum class Task { NONE, MATH, SCAN, SHAKE, GAME, RANDOM }
