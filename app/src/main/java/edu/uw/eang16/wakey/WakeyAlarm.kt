@@ -9,14 +9,14 @@ import java.util.*
 interface WakeyAlarm {
     // Uses the information from AlarmData to set off the alarm. Should be a part of onCreate.
     fun startAlarm(alarmData: AlarmData, context: Context) {
-        context.startService(Intent(context.applicationContext, WakeySoundService::class.java).apply {
+        context.startService(Intent(context, WakeySoundService::class.java).apply {
             putExtra("data", alarmData)
         })
     }
 
     // Upon successfully completing the task, stops the alarm
     fun stopAlarm(alarmData: AlarmData, context: Context) {
-        context.stopService(Intent(context.applicationContext, WakeySoundService::class.java).apply {
+        context.stopService(Intent(context, WakeySoundService::class.java).apply {
             putExtra("data", alarmData)
         })
     }
@@ -30,7 +30,18 @@ interface WakeyAlarm {
             AlarmHelper.getAlarmManager(context).setExact(
                 AlarmManager.RTC_WAKEUP,
                 Calendar.getInstance().timeInMillis +  SNOOZES[alarmData.snooze] * 60 * 1000,
-                AlarmHelper.getIntent(alarmData, context)
+                AlarmHelper.getIntent(AlarmData(
+                    alarmData.id,
+                    alarmData.day,
+                    alarmData.time,
+                    alarmData.task,
+                    alarmData.ringtone,
+                    alarmData.volume,
+                    alarmData.vibration,
+                    alarmData.snooze,
+                    alarmData.limit - 1,
+                    alarmData.active
+                ), context)
             )
             return true
         } else {
