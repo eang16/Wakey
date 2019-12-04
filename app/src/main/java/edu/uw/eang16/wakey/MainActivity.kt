@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        Log.e("msg", "Application Starting")
         updateList()
     }
 
@@ -58,15 +59,14 @@ class MainActivity : AppCompatActivity() {
         if (!file.exists()) {
             file.createNewFile()
         }
-        val rawText = FileReader(file).readText()
+        val fr = FileReader(file)
+        val rawText = fr.readText()
+        fr.close()
         val rawList = rawText.split("\n")
         for (i in rawList) {
             if (i.isNotEmpty() && i.isNotBlank()) {
                 val data = parseAlarmData(i)
                 aList.add(data)
-                if (data.active) {
-                    activateAlarm(data, applicationContext)
-                }
             }
         }
         aList.sort()
@@ -80,6 +80,7 @@ class MainActivity : AppCompatActivity() {
             nextAlarmTitle.visibility = View.VISIBLE
             nextAlarmContent.visibility = View.VISIBLE
         }
+
     }
 
     private class ViewHolder(var delete: ImageView? = null, var time: TextView? = null, var active: Switch? = null, var days: ConstraintLayout? = null)
@@ -107,7 +108,9 @@ class MainActivity : AppCompatActivity() {
             holder.active!!.tag = alarm
             holder.time!!.text = SimpleDateFormat("hh:mm a").format(alarm.time.time)
             holder.active!!.isChecked = alarm.active
-            holder.active!!.setOnCheckedChangeListener { buttonView, isChecked ->
+            holder.active!!.setOnClickListener {
+                val switch = it as Switch
+                val isChecked = switch.isChecked
                 val data = holder.active!!.tag as AlarmData
                 data.active = isChecked
                 if (isChecked) {
@@ -121,21 +124,23 @@ class MainActivity : AppCompatActivity() {
             for (i in 0 until holder.days!!.childCount) {
                 val tv = holder.days!!.getChildAt(i) as TextView
                 if (alarm.day[i]) {
-                    tv.setTextColor(Color.rgb(0, 191, 255))
+                    tv.setTextColor(Color.rgb(187, 134, 252))
                 } else {
                     tv.setTextColor(Color.LTGRAY)
                 }
             }
             holder.delete!!.setOnClickListener {
                 deleteAlarm(alarm)
-                val intent = Intent(context, MainActivity::class.java)
-                context.startActivity(intent)
+                val intent = Intent(context.applicationContext, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                context.applicationContext.startActivity(intent)
             }
 
 
             view!!.setOnClickListener {
                 val data = it.findViewById<View>(R.id.alarmTime).tag as AlarmData
                 val intent = Intent(context, EditAlarm::class.java).putExtra("data", data)
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                 context.startActivity(intent)
             }
 
