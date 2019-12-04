@@ -16,12 +16,6 @@ class ScanActivity : AppCompatActivity() {
             val intent = Intent(this, Scanner::class.java)
             startActivity(intent)
         }
-        scanText = findViewById(R.id.scanResult)
-    }
-
-    companion object {
-        @SuppressLint("StaticFieldLeak")
-        var scanText: TextView? = null
     }
 
 }

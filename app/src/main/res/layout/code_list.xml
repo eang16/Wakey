@@ -4,27 +4,31 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    tools:context=".ScanActivity">
+    tools:context=".QRBarcodeList">
 
-    <TextView
-        android:id="@+id/scanTitle"
+    <ListView
+        android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:divider="#D3D3D3"
+        android:dividerHeight="1dp"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:choiceMode="singleChoice"/>
+
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Scan a QR or Barcode"
-        android:textAppearance="@style/TextAppearance.AppCompat.Title"/>
+        android:layout_gravity="center"
+        android:layout_marginBottom="48dp">
 
     <Button
-        android:id="@+id/scanBtn"
+        android:id="@+id/scan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
         android:text="SCAN" />
 
-    <Button
-        android:id="@+id/snooze"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:text="Snooze" />
+    </LinearLayout>
+
+
 </LinearLayout>
