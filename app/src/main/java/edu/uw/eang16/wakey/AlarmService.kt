@@ -39,5 +39,22 @@ class AlarmService : Service() {
 
     fun soundAlarm(context: Context, data: AlarmData) {
         Log.e("msg", data.id + " Sounding")
+        // Todo: Form an intent using the when(x) case -> format
+        var task = data.task
+        if (task == Task.RANDOM) {
+            val rand = Random().nextInt(4) + 1
+            task = Task.values()[rand]
+        }
+        val intent =
+            when(task) {
+                Task.NONE -> Intent(context, NoTask::class.java)
+                Task.MATH -> Intent(context, MathSolver::class.java)
+                Task.SCAN -> Intent(context, ScanActivity::class.java)
+                Task.SHAKE -> Intent(context, ShakeServiceActivity::class.java)
+                Task.GAME -> Intent(context, NoTask::class.java)
+                else -> Intent(context, NoTask::class.java)
+            }
+        intent.putExtra("data", data)
+        context.startActivity(intent)
     }
 }
