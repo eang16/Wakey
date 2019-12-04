@@ -10,13 +10,17 @@ import java.util.*
 @Parcelize
 data class AlarmData(var id: String, var day: BooleanArray, var time: Calendar, var task: Task,
                      var ringtone: Uri, var volume: Int, var vibration: Int, var snooze: Int,
-                     var limit: Int, var active: Boolean): Parcelable {
+                     var limit: Int, var active: Boolean): Parcelable, Comparable<AlarmData> {
     override fun toString(): String {
         val date = SimpleDateFormat("HH:mm:ss").format(time.time)
         val stringy = id + "|" + day.joinToString(".") + "|" + date + "|" + task.name +
                 "|" + ringtone.toString() + "|" + volume.toString() + "|" + vibration.toString() +
                 "|" + snooze.toString() + "|" + limit.toString() + "|" + active.toString()
         return stringy
+    }
+
+    override fun compareTo(other: AlarmData): Int {
+        return time.compareTo(other.time)
     }
 }
 
