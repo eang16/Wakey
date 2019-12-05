@@ -12,6 +12,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_no_task)
         data = intent.getParcelableExtra("data")!!
+        startAlarm(data, this)
 
         snoozeBtn.setOnClickListener {
             if (snoozeAlarm(data, it.context)) {
