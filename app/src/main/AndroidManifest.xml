@@ -24,7 +24,9 @@
             android:enabled="true"
             android:exported="true" />
 
-        <service android:name=".WakeySoundService"></service>
+        <service android:name=".WakeySoundService"
+            android:enabled="true"
+            android:exported="true"></service>
 
         <activity
             android:name=".EditAlarm"

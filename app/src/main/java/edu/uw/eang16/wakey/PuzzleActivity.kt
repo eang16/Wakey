@@ -54,6 +54,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
             if(check) {
                 Toast.makeText(this, "Correct pattern!", Toast.LENGTH_SHORT).show()
                 stopAlarm(data, this)
+                finishAffinity()
             } else {
                 Toast.makeText(this, "Incorrect pattern. Try again!", Toast.LENGTH_SHORT).show()
                 clear(buttons)
