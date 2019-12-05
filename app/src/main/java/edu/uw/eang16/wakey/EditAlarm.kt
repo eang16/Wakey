@@ -169,6 +169,10 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
                 data.task = i
             }
         }
+        if (position == 2) {
+            val intent = Intent(this, QRBarcodeList::class.java)
+            startActivity(intent)
+        }
     }
     // for task
     override fun onNothingSelected(arg0: AdapterView<*>) {

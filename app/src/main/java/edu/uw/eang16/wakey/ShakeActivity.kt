@@ -14,6 +14,7 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shake)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         data = intent.getParcelableExtra("data")
 
         val intent = Intent(this, ShakeService::class.java)

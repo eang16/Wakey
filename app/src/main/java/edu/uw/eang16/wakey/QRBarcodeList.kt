@@ -6,6 +6,8 @@ import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
@@ -14,9 +16,12 @@ import kotlinx.android.synthetic.main.code_list.*
 
 class QRBarcodeList : AppCompatActivity() {
     private val codeList = arrayListOf<String>()
+    private var selectedCode: String? = null
+    private var selectedPosition: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.code_list)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, codeList)
@@ -31,13 +36,25 @@ class QRBarcodeList : AppCompatActivity() {
             val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
             if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
-                val intent = Intent(this, ScanActivity::class.java)
+                val intent = Intent(this, Scanner::class.java)
                 startActivity(intent)
             } else {
-                val intent = Intent(this, ScanActivity::class.java)
+                val intent = Intent(this, Scanner::class.java)
                 startActivity(intent)
             }
         }
+
+        // get selected barcode reference
+        listView.setOnItemClickListener { _, _, i, _ ->
+            val item = listView.adapter.getItem(i).toString()
+            selectedCode = intent.getStringExtra(item)
+            selectedPosition = i
+        }
+
+        // remember the selected choice
+        listView.setItemChecked(selectedPosition, true)
     }
+
+
 
 }
