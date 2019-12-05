@@ -76,16 +76,13 @@ class WakeySoundService: Service() {
             isLooping = true
             start()
         }
-        startForeground(0, buildNotification(applicationContext))
-        return START_NOT_STICKY
+        startForeground(data.id.toInt(), buildNotification(this))
+        return super.onStartCommand(intent, flags, startId)
     }
 
     override fun onDestroy() {
         stopForeground(true)
-        if (player != null) {
-            val plyr = player as MediaPlayer
-            plyr.stop()
-        }
+        player?.stop()
         super.onDestroy()
     }
 }
