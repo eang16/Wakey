@@ -19,8 +19,8 @@
                 android:id="@+id/button"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -28,8 +28,8 @@
                 android:id="@+id/button2"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -37,8 +37,8 @@
                 android:id="@+id/button3"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
         </LinearLayout>
@@ -50,8 +50,8 @@
                 android:id="@+id/button4"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -59,8 +59,8 @@
                 android:id="@+id/button5"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -68,8 +68,8 @@
                 android:id="@+id/button6"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -81,8 +81,8 @@
                 android:id="@+id/button7"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -90,8 +90,8 @@
                 android:id="@+id/button8"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -99,8 +99,8 @@
                 android:id="@+id/button9"
                 android:layout_margin="10dp"
                 android:background="@drawable/circle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 />
 
@@ -110,7 +110,7 @@
 
     <Button
         android:id="@+id/snooze"
-        android:layout_margin="10dp"
+        android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SNOOZE" />

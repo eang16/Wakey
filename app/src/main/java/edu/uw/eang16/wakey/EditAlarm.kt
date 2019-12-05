@@ -144,6 +144,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         //test shaker
         shakerbtn.setOnClickListener {
             val intent = Intent(this, ShakeActivity::class.java)
+            intent.putExtra("data", data)
             startActivity(intent)
         }
 
@@ -153,9 +154,11 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
                 val intent = Intent(this, ScanActivity::class.java)
+                intent.putExtra("data", data)
                 startActivity(intent)
             } else {
                 val intent = Intent(this, ScanActivity::class.java)
+                intent.putExtra("data", data)
                 startActivity(intent)
             }
         }
