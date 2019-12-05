@@ -44,7 +44,6 @@ class WakeySoundService: Service() {
             manager.createNotificationChannel(channel!!)
         }
 
-        //TODO: Make an intent which returns to the currently playing alarm (singleTop?)
         val intent = Intent(context, MainActivity::class.java)
         val pendingIntent = TaskStackBuilder.create(context).run {
             // Add the intent, which inflates the back stack

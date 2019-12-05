@@ -139,7 +139,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
         // Snooze duration and limit
         snoozeDuration.text = snoozeDurationItems[data.snooze]
-        snoozeLimit.text = snoozeLimitItems[data.limit]
+        //snoozeLimit.text = snoozeLimitItems[data.limit]
 
         //test shaker
         shakerbtn.setOnClickListener {
@@ -262,6 +262,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         builder.show()
     }
 
+    /*
     // for snooze limit
     fun snoozeLimitDialog(v: View) {
         val builder = AlertDialog.Builder(this)
@@ -273,5 +274,5 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         }
         builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
         builder.show()
-    }
+    }*/
 }

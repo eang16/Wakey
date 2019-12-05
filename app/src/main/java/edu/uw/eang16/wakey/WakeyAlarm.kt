@@ -34,9 +34,7 @@ interface WakeyAlarm {
 
             return true
         } else {
-            Log.e("msg", "No snoozes left OR snooze time is 0")
             return false
         }
-
     }
 }

@@ -255,6 +255,7 @@
         android:onClick="snoozeDurationDialog"
         />
 
+    <!--
     <TextView
         android:id="@+id/snoozeLimitTitle"
         android:layout_width="match_parent"
@@ -276,7 +277,7 @@
         app:layout_constraintTop_toBottomOf="@id/snoozeLimitTitle"
         android:layout_marginStart="16dp"
         android:onClick="snoozeLimitDialog"
-        />
+        />-->
 
     <Button
         android:id="@+id/shakerbtn"
@@ -284,7 +285,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         android:text="test shaker"
-        app:layout_constraintTop_toBottomOf="@id/snoozeLimit"/>
+        app:layout_constraintTop_toBottomOf="@id/snoozeDuration"/>
 
     <Button
         android:id="@+id/scannerbtn"
