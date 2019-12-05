@@ -32,16 +32,14 @@ class QRBarcodeList : AppCompatActivity() {
         codeList.addAll(Scanner.codeArray)
         adapter.notifyDataSetChanged()
 
+        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
+        }
+
         scan.setOnClickListener {
-            val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
-                val intent = Intent(this, Scanner::class.java)
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, Scanner::class.java)
-                startActivity(intent)
-            }
+            val intent = Intent(this, Scanner::class.java)
+            startActivity(intent)
         }
 
         // get selected barcode reference
