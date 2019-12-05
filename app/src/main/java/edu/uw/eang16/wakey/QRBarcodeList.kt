@@ -69,6 +69,7 @@ class QRBarcodeList : AppCompatActivity() {
 
     private fun updatePosition(fileName: String, value: String) {
         val myFile = File(filesDir, fileName)
+        if (!myFile.exists()) { myFile.createNewFile() }
         val writer = FileWriter(myFile, false)
         writer.write(value)
         writer.close()

@@ -55,6 +55,7 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
 
     private fun updateResult(fileName: String, value: String) {
         val myFile = File(filesDir, fileName)
+        if (!myFile.exists()) { myFile.createNewFile() }
         val writer = FileWriter(myFile, false)
         writer.write(value)
         writer.close()
