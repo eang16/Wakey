@@ -9,8 +9,10 @@ import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
+import android.os.Build
 import android.os.Handler
 import android.util.Log
+import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_shake.*
@@ -28,6 +30,11 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        }
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_shake)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -51,11 +58,6 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
         mSensorManager.registerListener(this, mAccelerometer, SensorManager.SENSOR_DELAY_UI, Handler())
     }
 
-    override fun onPause() {
-        super.onPause()
-        mSensorManager.unregisterListener(this, mAccelerometer)
-    }
-
     override fun onAccuracyChanged(sensor:Sensor, accuracy:Int) {}
 
     override fun onSensorChanged(event: SensorEvent) {
@@ -71,9 +73,10 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
             shakeText!!.text = "$mShakeCount%"
             if (mShakeCount >= 100) {
                 shakeText!!.text = "100%"
-                Toast.makeText(this, "Task solved! Alarm dismissed!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Task solved! Alarm dismissed!", Toast.LENGTH_LONG).show()
                 stopAlarm(data, this)
                 finish()
+                mSensorManager.unregisterListener(this, mAccelerometer)
             }
         }
     }

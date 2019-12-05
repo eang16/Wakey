@@ -1,5 +1,6 @@
 package edu.uw.eang16.wakey
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.format.DateUtils
@@ -12,6 +13,10 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
     lateinit var data: AlarmData
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_no_task)
         data = intent.getParcelableExtra("data")!!

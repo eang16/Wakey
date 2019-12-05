@@ -2,6 +2,7 @@ package edu.uw.eang16.wakey
 
 import android.content.Intent
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -18,6 +19,10 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
     var key = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_solver)
         val data = this.intent!!.getParcelableExtra("data") as AlarmData

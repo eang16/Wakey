@@ -1,6 +1,7 @@
 package edu.uw.eang16.wakey
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_math_solver.*
@@ -26,10 +27,15 @@ enum class Operator {
 
 class MathSolver: AppCompatActivity(), WakeyAlarm {
 
+
     var answer: Int = 0
     val operator = listOf(Operator.PLUS, Operator.MINUS, Operator.MULTIPLY, Operator.DIVIDE)
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_math_solver)
         problem.text = makeProblem()

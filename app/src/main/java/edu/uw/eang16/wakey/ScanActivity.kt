@@ -2,6 +2,7 @@ package edu.uw.eang16.wakey
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -20,6 +21,10 @@ class ScanActivity : AppCompatActivity(), WakeyAlarm, ZXingScannerView.ResultHan
     private var mScannerView: ZXingScannerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O_MR1) {
+            setShowWhenLocked(true)
+            setTurnScreenOn(true)
+        }
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_scan_code)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
