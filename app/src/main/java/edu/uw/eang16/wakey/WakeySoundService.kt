@@ -17,6 +17,7 @@ class WakeySoundService: Service() {
     private val CHANNEL_ID = "Wakey Alarm Clock Notification Channel"
     private var notifChannel: NotificationChannel? = null
     private var notifManager: NotificationManager? = null
+    private var player: MediaPlayer? = null
 
     private fun getNC(): NotificationChannel? {
         if (notifChannel == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -71,16 +72,19 @@ class WakeySoundService: Service() {
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         Log.e("msg", "Music should be playing right about now")
         data = intent!!.getParcelableExtra("data") as AlarmData
-        ringtone = RingtoneManager.getRingtone(applicationContext, data.ringtone)
-        ringtone.play()
+        player = MediaPlayer.create(this, data.ringtone).apply {
+            isLooping = true
+            start()
+        }
         startForeground(0, buildNotification(applicationContext))
         return START_NOT_STICKY
     }
 
     override fun onDestroy() {
         stopForeground(true)
-        if (ringtone != null) {
-            ringtone.stop()
+        if (player != null) {
+            val plyr = player as MediaPlayer
+            plyr.stop()
         }
         super.onDestroy()
     }
