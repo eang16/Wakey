@@ -45,6 +45,11 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
         }
 
         snooze.setOnClickListener {
+            snoozeAlarm(data, this)
+            finish()
+        }
+
+        puzzle_submit.setOnClickListener {
             var check = true
             for(i in 0..8) {
                 if (answer[i] != buttons[i].text) {
@@ -54,7 +59,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
             if(check) {
                 Toast.makeText(this, "Correct pattern!", Toast.LENGTH_SHORT).show()
                 stopAlarm(data, this)
-                finishAffinity()
+                finish()
             } else {
                 Toast.makeText(this, "Incorrect pattern. Try again!", Toast.LENGTH_SHORT).show()
                 clear(buttons)
