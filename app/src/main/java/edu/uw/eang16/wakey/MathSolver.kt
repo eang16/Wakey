@@ -3,6 +3,7 @@ package edu.uw.eang16.wakey
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_math_solver.*
 import kotlin.random.Random
@@ -43,8 +44,10 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         startAlarm(data,this)
 
         snooze.setOnClickListener {
-            snoozeAlarm(data, this)
-            finish()
+            if (snoozeAlarm(data, it.context)) {
+                Log.e("msg", "Snooze button pressed")
+                finish()
+            }
         }
 
         math_submit.setOnClickListener {
