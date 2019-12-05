@@ -37,9 +37,15 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         startAlarm(data,this)
 
         snooze.setOnClickListener {
+            snoozeAlarm(data, this)
+            finish()
+        }
+
+        math_submit.setOnClickListener {
             if (input_answer.text.toString() === "$answer") {
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
                 stopAlarm(data,this)
+                finish()
             } else {
                 Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
             }

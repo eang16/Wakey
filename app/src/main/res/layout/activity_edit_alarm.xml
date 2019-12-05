@@ -294,9 +294,21 @@
         android:text="test scanner"
         app:layout_constraintTop_toBottomOf="@id/shakerbtn"/>
 
+    <Button
+        android:id="@+id/puzzlebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="test puzzle"
+        app:layout_constraintTop_toBottomOf="@id/scannerbtn" />
 
-
-
+    <Button
+        android:id="@+id/mathbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        android:text="test math"
+        app:layout_constraintTop_toBottomOf="@id/puzzlebtn" />
 
 
 

@@ -20,7 +20,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_puzzle_solver)
-        val data = intent!!.getParcelableExtra("data") as AlarmData
+        val data = this.intent!!.getParcelableExtra("data") as AlarmData
         startAlarm(data, this)
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
@@ -45,6 +45,11 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
         }
 
         snooze.setOnClickListener {
+            snoozeAlarm(data, this)
+            finish()
+        }
+
+        puzzle_submit.setOnClickListener {
             var check = true
             for(i in 0..8) {
                 if (answer[i] != buttons[i].text) {
@@ -54,6 +59,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
             if(check) {
                 Toast.makeText(this, "Correct pattern!", Toast.LENGTH_SHORT).show()
                 stopAlarm(data, this)
+                finish()
             } else {
                 Toast.makeText(this, "Incorrect pattern. Try again!", Toast.LENGTH_SHORT).show()
                 clear(buttons)
