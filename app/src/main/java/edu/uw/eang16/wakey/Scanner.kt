@@ -1,7 +1,5 @@
 package edu.uw.eang16.wakey
 
-import android.content.Context
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.EditText
@@ -44,33 +42,27 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
         builder.setView(dialogLayout)
         builder.setPositiveButton("Done") { _, _ ->
             val label = editText.text.toString()
-            updateFile(label, rawResult.text)
+            updateResult(label, rawResult.text)
             val intent = Intent(this, QRBarcodeList::class.java)
             codeArray.add(label)
-            //intent.putExtra(label, rawResult.text)
-            //codeArray.add(rawResult.text)
             startActivity(intent)}
         builder.setNegativeButton("Cancel") { _, _ ->
             mScannerView!!.resumeCameraPreview(this)
         }
         val dialog = builder.show()
         dialog.setCanceledOnTouchOutside(false)
-
-        /*
-        mScannerView!!.resumeCameraPreview(this)
-            dialog.dismiss()
-         */
-
     }
+
+    private fun updateResult(fileName: String, value: String) {
+        val myFile = File(filesDir, fileName)
+        val writer = FileWriter(myFile, false)
+        writer.write(value)
+        writer.close()
+    }
+
     companion object {
         var codeArray = arrayListOf<String>()
     }
 
-    fun updateFile(fileName: String, value: String) {
-        val myFile = File(filesDir, fileName)
-        val writer = FileWriter(myFile, true)
-        writer.write(value)
-        writer.close()
-    }
 
 }

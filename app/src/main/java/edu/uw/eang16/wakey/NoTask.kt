@@ -3,11 +3,9 @@ package edu.uw.eang16.wakey
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.format.DateUtils
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_no_task.*
 import java.text.SimpleDateFormat
-import java.util.*
 
 class NoTask : AppCompatActivity(), WakeyAlarm {
     lateinit var data: AlarmData

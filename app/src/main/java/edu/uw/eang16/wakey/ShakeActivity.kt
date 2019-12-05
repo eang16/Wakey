@@ -4,15 +4,12 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.content.Intent
 import android.hardware.Sensor
 import android.hardware.SensorEvent
 import android.hardware.SensorEventListener
 import android.hardware.SensorManager
 import android.os.Build
 import android.os.Handler
-import android.util.Log
-import android.view.WindowManager
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_shake.*
@@ -23,9 +20,9 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
 
     private lateinit var mSensorManager: SensorManager
     private lateinit var mAccelerometer: Sensor
-    private var mAccel:Float = 0.toFloat() // acceleration apart from gravity
-    private var mAccelCurrent:Float = 0.toFloat() // current acceleration including gravity
-    private var mAccelLast:Float = 0.toFloat() // last acceleration including gravity
+    private var mAccel:Float = 0.toFloat()
+    private var mAccelCurrent:Float = 0.toFloat()
+    private var mAccelLast:Float = 0.toFloat()
     private var mShakeCount:Int = 0
 
 

@@ -5,9 +5,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
-import android.view.View
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import androidx.core.app.ActivityCompat
@@ -15,11 +12,10 @@ import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.code_list.*
 import java.io.File
 import java.io.FileReader
+import java.io.FileWriter
 
 class QRBarcodeList : AppCompatActivity() {
     private val codeList = arrayListOf<String>()
-    private var selectedPosition: Int = 0
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +25,7 @@ class QRBarcodeList : AppCompatActivity() {
         val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, codeList)
 
         val listView = findViewById<ListView>(R.id.listview)
+
         listView.adapter = adapter
 
         codeList.addAll(Scanner.codeArray)
@@ -44,31 +41,38 @@ class QRBarcodeList : AppCompatActivity() {
             startActivity(intent)
         }
 
-        // get selected barcode reference
-
         listView.setOnItemClickListener { _, _, i, _ ->
             val item = listView.adapter.getItem(i).toString()
-            selectedCode = read(item)
-            //selectedPosition = i
+            selectedCode = readResult(item)
+            updatePosition(i.toString(), i.toString())
+            selectedPosition = readPosition(i.toString())
         }
 
-        // remember the selected choice
-        //listView.setItemChecked(selectedPosition, true)
+        if (selectedPosition != null) {
+            listView.setItemChecked(selectedPosition!!.toInt(), true)
+        }
     }
 
-    /*override fun onSupportNavigateUp(): Boolean {
-        onBackPressed()
-        return true
-    }*/
-
-    companion object {
-        var selectedCode: String? = null
-    }
-
-    fun read(fileName: String):String {
+    private fun readResult(fileName: String):String {
         val myFile = File(filesDir, fileName)
         return FileReader(myFile).readText()
     }
 
+    private fun readPosition(fileName: String): String {
+        val myFile = File(filesDir, fileName)
+        return FileReader(myFile).readText()
+    }
+
+    private fun updatePosition(fileName: String, value: String) {
+        val myFile = File(filesDir, fileName)
+        val writer = FileWriter(myFile, false)
+        writer.write(value)
+        writer.close()
+    }
+
+    companion object {
+        var selectedCode: String? = null
+        var selectedPosition: String? = null
+    }
 
 }
