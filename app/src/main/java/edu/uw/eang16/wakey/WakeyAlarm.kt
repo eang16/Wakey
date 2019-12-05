@@ -26,22 +26,10 @@ interface WakeyAlarm {
         if (alarmData.limit > 0) {
             stopAlarm(alarmData, context.applicationContext)
 
-            val newData = AlarmData(
-                alarmData.id,
-                alarmData.day,
-                alarmData.time,
-                alarmData.task,
-                alarmData.ringtone,
-                alarmData.volume,
-                alarmData.vibration,
-                alarmData.snooze,
-                alarmData.limit - 1,
-                alarmData.active
-            )
             AlarmHelper.getAlarmManager(context.applicationContext).setExact(
                 AlarmManager.RTC_WAKEUP,
                 Calendar.getInstance().timeInMillis + SNOOZES[alarmData.snooze] * 60 * 1000,
-                AlarmHelper.getIntent(newData, context.applicationContext)
+                AlarmHelper.getIntent(alarmData, context.applicationContext)
             )
 
             return true
