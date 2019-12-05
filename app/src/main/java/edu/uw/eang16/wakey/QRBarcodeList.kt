@@ -31,14 +31,11 @@ class QRBarcodeList : AppCompatActivity() {
 
         codeList.addAll(Scanner.codeArray)
         adapter.notifyDataSetChanged()
-
-<<<<<<< HEAD
+        
         val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
         }
-=======
->>>>>>> 6cdba632aba1923741c8d78ecaba1df3b1bb435b
 
         scan.setOnClickListener {
             val intent = Intent(this, Scanner::class.java)
