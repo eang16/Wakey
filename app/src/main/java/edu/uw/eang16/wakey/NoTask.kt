@@ -27,3 +27,4 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         }
     }
 }
+

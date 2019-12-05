@@ -3,6 +3,7 @@ package edu.uw.eang16.wakey
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -26,23 +27,31 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
                               button4, button5, button6,
                               button7, button8, button9)
 
-        for(btn in buttons) {
-            btn.setOnClickListener {
-                if (btn.text === " ") {
-                    btn.background = getResources().getDrawable(R.drawable.circle)
-                    btn.text = ""
-                } else {
-                    btn.background = getResources().getDrawable(R.drawable.circle_selected)
-                    btn.text = " "
+        val answer = randomAnswer()
+
+        start.setOnClickListener {
+            for(btn in buttons) {
+                btn.visibility = View.VISIBLE
+                btn.setOnClickListener {
+                    if (btn.text === " ") {
+                        btn.background = getResources().getDrawable(R.drawable.circle)
+                        btn.text = ""
+                    } else {
+                        btn.background = getResources().getDrawable(R.drawable.circle_selected)
+                        btn.text = " "
+                    }
                 }
+            }
+            snooze.visibility = View.VISIBLE
+            puzzle_submit.visibility = View.VISIBLE
+            start.visibility = View.INVISIBLE
+            showAnswer(buttons)
+            Timer("SetUp", false).schedule(2000) {
+                clear(buttons)
             }
         }
 
-        val answer = randomAnswer()
-        showAnswer(buttons)
-        Timer("SetUp", false).schedule(2000) {
-            clear(buttons)
-        }
+
 
         snooze.setOnClickListener {
             snoozeAlarm(data, this)
@@ -88,12 +97,14 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
     fun showAnswer(btns: Array<Button>) {
         for (key in key) {
             btns[key].background = getResources().getDrawable(R.drawable.circle_selected)
+            btns[key].isClickable = false
         }
     }
 
     fun clear(btns: Array<Button>) {
         for (btn in btns) {
             btn.background = getResources().getDrawable(R.drawable.circle)
+            btn.isClickable = true
         }
     }
 
