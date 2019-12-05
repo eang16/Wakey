@@ -150,17 +150,9 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
         //test scanner
         scannerbtn.setOnClickListener {
-            val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-            if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
-                val intent = Intent(this, ScanActivity::class.java)
-                intent.putExtra("data", data)
-                startActivity(intent)
-            } else {
-                val intent = Intent(this, ScanActivity::class.java)
-                intent.putExtra("data", data)
-                startActivity(intent)
-            }
+            val intent = Intent(this, ScanActivity::class.java)
+            intent.putExtra("data", data)
+            startActivity(intent)
         }
 
         //test Puzzle

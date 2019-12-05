@@ -31,7 +31,7 @@ class QRBarcodeList : AppCompatActivity() {
 
         codeList.addAll(Scanner.codeArray)
         adapter.notifyDataSetChanged()
-        
+
         val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
