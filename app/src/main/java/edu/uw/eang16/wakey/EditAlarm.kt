@@ -139,11 +139,12 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
         // Snooze duration and limit
         snoozeDuration.text = snoozeDurationItems[data.snooze]
-        snoozeLimit.text = snoozeLimitItems[data.limit]
+        //snoozeLimit.text = snoozeLimitItems[data.limit]
 
         //test shaker
         shakerbtn.setOnClickListener {
             val intent = Intent(this, ShakeActivity::class.java)
+            intent.putExtra("data", data)
             startActivity(intent)
         }
 
@@ -153,9 +154,11 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
                 val intent = Intent(this, ScanActivity::class.java)
+                intent.putExtra("data", data)
                 startActivity(intent)
             } else {
                 val intent = Intent(this, ScanActivity::class.java)
+                intent.putExtra("data", data)
                 startActivity(intent)
             }
         }
@@ -259,6 +262,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         builder.show()
     }
 
+    /*
     // for snooze limit
     fun snoozeLimitDialog(v: View) {
         val builder = AlertDialog.Builder(this)
@@ -270,5 +274,5 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
         }
         builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
         builder.show()
-    }
+    }*/
 }

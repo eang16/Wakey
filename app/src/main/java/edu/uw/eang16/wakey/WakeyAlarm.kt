@@ -16,41 +16,25 @@ interface WakeyAlarm {
 
     // Upon successfully completing the task, stops the alarm
     fun stopAlarm(alarmData: AlarmData, context: Context) {
-        context.applicationContext.stopService(Intent(context, WakeySoundService::class.java).apply {
+        context.applicationContext.stopService(Intent(context.applicationContext, WakeySoundService::class.java).apply {
             putExtra("data", alarmData)
         })
     }
 
     // Snoozes the alarm by unsetting it, decrementing the snooze counter, and then continuing
     fun snoozeAlarm(alarmData: AlarmData, context: Context): Boolean {
-        if (alarmData.limit > 0 && alarmData.snooze != 0) {
-            stopAlarm(alarmData, context)
-            Log.e("msg", "Alarm has stuff to snooze")
-            Log.e("msg", alarmData.limit.toString())
+        if (alarmData.limit > 0) {
+            stopAlarm(alarmData, context.applicationContext)
 
-            val newData = AlarmData(
-                alarmData.id,
-                alarmData.day,
-                alarmData.time,
-                alarmData.task,
-                alarmData.ringtone,
-                alarmData.volume,
-                alarmData.vibration,
-                alarmData.snooze,
-                alarmData.limit - 1,
-                alarmData.active
-            )
-            AlarmHelper.getAlarmManager(context).setExact(
+            AlarmHelper.getAlarmManager(context.applicationContext).setExact(
                 AlarmManager.RTC_WAKEUP,
-                Calendar.getInstance().timeInMillis +  SNOOZES[alarmData.snooze] * 60 * 1000,
-                AlarmHelper.getIntent(newData, context)
+                Calendar.getInstance().timeInMillis + SNOOZES[alarmData.snooze] * 60 * 1000,
+                AlarmHelper.getIntent(alarmData, context.applicationContext)
             )
-            Log.e("msg", newData.limit.toString())
+
             return true
         } else {
-            Log.e("msg", "No snoozes left OR snooze time is 0")
             return false
         }
-
     }
 }

@@ -16,8 +16,8 @@ import kotlinx.android.synthetic.main.code_list.*
 
 class QRBarcodeList : AppCompatActivity() {
     private val codeList = arrayListOf<String>()
-    private var selectedCode: String? = null
     private var selectedPosition: Int = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,14 +47,18 @@ class QRBarcodeList : AppCompatActivity() {
         // get selected barcode reference
         listView.setOnItemClickListener { _, _, i, _ ->
             val item = listView.adapter.getItem(i).toString()
-            selectedCode = intent.getStringExtra(item)
+            Companion.selectedCode = intent.getStringExtra(item)
             selectedPosition = i
-        }
+            Log.e("msg", selectedPosition.toString())
 
+        }
         // remember the selected choice
         listView.setItemChecked(selectedPosition, true)
     }
 
+    companion object {
+        var selectedCode: String? = null
+    }
 
 
 }

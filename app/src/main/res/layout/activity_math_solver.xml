@@ -9,6 +9,7 @@
 
     <TextView
         android:id="@+id/problem"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="(7 x 6) + (6 x 2) = " />
@@ -17,17 +18,25 @@
         android:id="@+id/input_answer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
         android:ems="10"
         android:inputType="text"
         android:textAlignment="center"/>
+=======
+        android:ems="12"
+        android:layout_marginTop="16dp"
+        android:inputType="numberDecimal" />
+>>>>>>> aa0b8a73f5489674bcc1bed356e4a549556c6f6e
 
     <Button
         android:id="@+id/snooze"
+        android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="SNOOZE" />
     <Button
         android:id="@+id/math_submit"
+        android:layout_marginTop="32dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="ANSWER" />
