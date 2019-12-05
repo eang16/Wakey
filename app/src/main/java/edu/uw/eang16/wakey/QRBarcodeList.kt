@@ -32,10 +32,13 @@ class QRBarcodeList : AppCompatActivity() {
         codeList.addAll(Scanner.codeArray)
         adapter.notifyDataSetChanged()
 
+<<<<<<< HEAD
         val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
         if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
         }
+=======
+>>>>>>> 6cdba632aba1923741c8d78ecaba1df3b1bb435b
 
         scan.setOnClickListener {
             val intent = Intent(this, Scanner::class.java)
@@ -43,16 +46,22 @@ class QRBarcodeList : AppCompatActivity() {
         }
 
         // get selected barcode reference
+
         listView.setOnItemClickListener { _, _, i, _ ->
             val item = listView.adapter.getItem(i).toString()
-            Companion.selectedCode = intent.getStringExtra(item)
+            selectedCode = intent.getStringExtra(item)
             selectedPosition = i
-            Log.e("msg", selectedPosition.toString())
-
         }
+
+
         // remember the selected choice
-        listView.setItemChecked(selectedPosition, true)
+        //listView.setItemChecked(selectedPosition, true)
     }
+
+    /*override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
+    }*/
 
     companion object {
         var selectedCode: String? = null

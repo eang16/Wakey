@@ -17,6 +17,7 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
     private var mScannerView: ZXingScannerView? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         super.onCreate(savedInstanceState)
         mScannerView = ZXingScannerView(this)
         setContentView(mScannerView)
@@ -63,4 +64,5 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
     companion object {
         var codeArray = arrayListOf<String>()
     }
+
 }

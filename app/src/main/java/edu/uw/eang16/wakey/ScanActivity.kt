@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -58,7 +59,9 @@ class ScanActivity : AppCompatActivity(), WakeyAlarm, ZXingScannerView.ResultHan
     }
 
     override fun handleResult(rawResult: Result) {
-        if (rawResult.text == QRBarcodeList.selectedCode) {
+        Log.e("result", rawResult.text)
+        Log.e("selected", QRBarcodeList.selectedCode.toString())
+        if (rawResult.text == QRBarcodeList.selectedCode.toString()) {
             Toast.makeText(this, "Task solved! Alarm dismissed!", Toast.LENGTH_SHORT).show()
             stopAlarm(data, this)
             finish()
