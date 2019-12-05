@@ -48,6 +48,7 @@ class QRBarcodeList : AppCompatActivity() {
             val item = listView.adapter.getItem(i).toString()
             selectedCode = intent.getStringExtra(item)
             selectedPosition = i
+            Log.e("selected", selectedCode.toString())
         }
 
 
