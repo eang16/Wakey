@@ -21,11 +21,6 @@
             android:label= "Shake Your Phone"
             android:parentActivityName=".MainActivity"/>
 
-        <service
-            android:name=".ShakeService"
-            android:enabled="true"
-            android:exported="true" />
-
         <service android:name=".WakeySoundService"
             android:enabled="true"
             android:exported="true"></service>

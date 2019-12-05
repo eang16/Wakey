@@ -2,8 +2,11 @@ package edu.uw.eang16.wakey
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.format.DateUtils
 import android.util.Log
 import kotlinx.android.synthetic.main.activity_no_task.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class NoTask : AppCompatActivity(), WakeyAlarm {
     lateinit var data: AlarmData
@@ -13,6 +16,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         setContentView(R.layout.activity_no_task)
         data = intent.getParcelableExtra("data")!!
         startAlarm(data, this)
+        time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
 
         snoozeBtn.setOnClickListener {
             if (snoozeAlarm(data, it.context)) {
