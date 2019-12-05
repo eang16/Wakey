@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -59,8 +60,10 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
 
 
         snooze.setOnClickListener {
-            snoozeAlarm(data, this)
-            finish()
+            if (snoozeAlarm(data, it.context)) {
+                Log.e("msg", "Snooze button pressed")
+                finish()
+            }
         }
 
         puzzle_submit.setOnClickListener {

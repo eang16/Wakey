@@ -13,6 +13,8 @@ import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.code_list.*
+import java.io.File
+import java.io.FileReader
 
 class QRBarcodeList : AppCompatActivity() {
     private val codeList = arrayListOf<String>()
@@ -46,10 +48,9 @@ class QRBarcodeList : AppCompatActivity() {
 
         listView.setOnItemClickListener { _, _, i, _ ->
             val item = listView.adapter.getItem(i).toString()
-            selectedCode = intent.getStringExtra(item)
-            selectedPosition = i
+            selectedCode = read(item)
+            //selectedPosition = i
         }
-
 
         // remember the selected choice
         //listView.setItemChecked(selectedPosition, true)
@@ -62,6 +63,11 @@ class QRBarcodeList : AppCompatActivity() {
 
     companion object {
         var selectedCode: String? = null
+    }
+
+    fun read(fileName: String):String {
+        val myFile = File(filesDir, fileName)
+        return FileReader(myFile).readText()
     }
 
 

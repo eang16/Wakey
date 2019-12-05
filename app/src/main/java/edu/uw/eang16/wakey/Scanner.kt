@@ -9,8 +9,8 @@ import androidx.appcompat.app.AlertDialog
 import com.google.zxing.Result
 import me.dm7.barcodescanner.zxing.ZXingScannerView
 import android.content.Intent
-
-
+import java.io.File
+import java.io.FileWriter
 
 
 class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
@@ -44,9 +44,10 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
         builder.setView(dialogLayout)
         builder.setPositiveButton("Done") { _, _ ->
             val label = editText.text.toString()
+            updateFile(label, rawResult.text)
             val intent = Intent(this, QRBarcodeList::class.java)
             codeArray.add(label)
-            intent.putExtra(label, rawResult.text)
+            //intent.putExtra(label, rawResult.text)
             //codeArray.add(rawResult.text)
             startActivity(intent)}
         builder.setNegativeButton("Cancel") { _, _ ->
@@ -63,6 +64,13 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
     }
     companion object {
         var codeArray = arrayListOf<String>()
+    }
+
+    fun updateFile(fileName: String, value: String) {
+        val myFile = File(filesDir, fileName)
+        val writer = FileWriter(myFile, true)
+        writer.write(value)
+        writer.close()
     }
 
 }
