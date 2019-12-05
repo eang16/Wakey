@@ -48,12 +48,12 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         }
 
         math_submit.setOnClickListener {
-            if (input_answer.text.toString() === "$answer") {
+            if (input_answer.text.toString().equals("$answer")) {
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
                 stopAlarm(data,this)
                 finish()
             } else {
-                Toast.makeText(this, "Try again", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Wrong answer. Try again!", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -62,10 +62,10 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
     fun makeProblem(): String {
         val todayOperator = mutableListOf<Operator>()
         setTodayOperator(todayOperator)
-        answer = (Random.nextInt(20) + 1)
-        var result: String = "$answer"
+        answer = (Random.nextInt(10) + 1)
+        var result = "$answer"
         for (operator in todayOperator) {
-            val temp = Random.nextInt(20) + 1
+            val temp = Random.nextInt(10) + 1
             if (operator === Operator.PLUS) {
                 answer += temp
                 result += " + ${temp}"
