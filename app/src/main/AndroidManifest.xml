@@ -18,7 +18,9 @@
             android:showOnLockScreen="true"
             android:parentActivityName=".MainActivity">
         </activity>
-        <activity android:name=".Scanner" />
+        <activity android:name=".Scanner"
+            android:label="Scanner"
+            android:parentActivityName=".EditAlarm"/>
 
         <activity android:name=".ScanActivity"
             android:label= "Scan QR/Barcode"
@@ -37,6 +39,7 @@
         <activity
             android:name=".EditAlarm"
             android:label="@string/editalarm"
+            android:launchMode="singleTop"
             android:parentActivityName=".MainActivity" />
 
         <activity
