@@ -14,10 +14,12 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".NoTask"></activity>
-        <activity android:name=".QRBarcodeList" />
         <activity android:name=".Scanner" />
         <activity android:name=".ScanActivity" />
-        <activity android:name=".ShakeServiceActivity" />
+
+        <activity android:name=".ShakeActivity"
+            android:label= "Shake Your Phone"
+            android:parentActivityName=".MainActivity"/>
 
         <service
             android:name=".ShakeService"
@@ -42,6 +44,11 @@
             android:name=".PuzzleActivity"
             android:label="@string/puzzle"
             android:parentActivityName=".MainActivity" />
+
+        <activity
+            android:name=".QRBarcodeList"
+            android:label="Scan QR/Barcode"
+            android:parentActivityName=".EditAlarm" />
 
         <activity
             android:name=".MainActivity"

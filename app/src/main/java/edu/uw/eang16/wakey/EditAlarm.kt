@@ -4,27 +4,21 @@ import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.TimePickerDialog
-import android.content.Context
 import android.media.Ringtone
 import android.media.RingtoneManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import kotlinx.android.synthetic.main.activity_edit_alarm.*
-import kotlinx.android.synthetic.main.alarm_list.*
 import java.text.SimpleDateFormat
 import java.util.*
 import android.view.Menu
 import android.view.MenuItem
-import android.media.RingtoneManager.TYPE_ALARM
 
 import android.net.Uri
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.ColorSpace
-import android.util.Log
 import android.widget.*
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -149,7 +143,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
 
         //test shaker
         shakerbtn.setOnClickListener {
-            val intent = Intent(this, ShakeServiceActivity::class.java)
+            val intent = Intent(this, ShakeActivity::class.java)
             startActivity(intent)
         }
 
@@ -187,6 +181,10 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             if (taskMap[i] == position) {
                 data.task = i
             }
+        }
+        if (position == 2) {
+            val intent = Intent(this, QRBarcodeList::class.java)
+            startActivity(intent)
         }
     }
     // for task
