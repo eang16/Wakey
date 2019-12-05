@@ -10,6 +10,7 @@ import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.code_list.*
+import kotlinx.android.synthetic.main.save_code.*
 import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
@@ -46,6 +47,9 @@ class QRBarcodeList : AppCompatActivity() {
             selectedCode = readResult(item)
             updatePosition(i.toString(), i.toString())
             selectedPosition = readPosition(i.toString())
+            deleteCode.setOnClickListener{
+                deleteCode(item)
+            }
         }
 
         if (selectedPosition != null) {
@@ -68,6 +72,10 @@ class QRBarcodeList : AppCompatActivity() {
         val writer = FileWriter(myFile, false)
         writer.write(value)
         writer.close()
+    }
+
+    private fun deleteCode(fileName: String) {
+        File(filesDir, fileName).delete()
     }
 
     companion object {
