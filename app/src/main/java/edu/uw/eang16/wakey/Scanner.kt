@@ -67,10 +67,4 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
         writer.write(label + "\n")
         writer.close()
     }
-
-//    companion object {
-//        var codeArray = arrayListOf<String>()
-//    }
-
-
 }

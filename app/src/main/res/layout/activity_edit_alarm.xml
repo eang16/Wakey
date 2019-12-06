@@ -261,62 +261,6 @@
         android:onClick="snoozeDurationDialog"
         />
 
-    <!--
-    <TextView
-        android:id="@+id/snoozeLimitTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Snooze Limit"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/snoozeDuration"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"/>
-
-    <TextView
-        android:id="@+id/snoozeLimit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="None"
-        android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/snoozeLimitTitle"
-        android:layout_marginStart="16dp"
-        android:onClick="snoozeLimitDialog"
-        />-->
-
-    <Button
-        android:id="@+id/shakerbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="test shaker"
-        app:layout_constraintTop_toBottomOf="@id/snoozeDuration"/>
-
-    <Button
-        android:id="@+id/scannerbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="test scanner"
-        app:layout_constraintTop_toBottomOf="@id/shakerbtn"/>
-
-    <Button
-        android:id="@+id/puzzlebtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="test puzzle"
-        app:layout_constraintTop_toBottomOf="@id/scannerbtn" />
-
-    <Button
-        android:id="@+id/mathbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        android:text="test math"
-        app:layout_constraintTop_toBottomOf="@id/puzzlebtn" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

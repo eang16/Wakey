@@ -140,34 +140,6 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         // Snooze duration and limit
         snoozeDuration.text = snoozeDurationItems[data.snooze]
         //snoozeLimit.text = snoozeLimitItems[data.limit]
-
-        //test shaker
-        shakerbtn.setOnClickListener {
-            val intent = Intent(this, ShakeActivity::class.java)
-            intent.putExtra("data", data)
-            startActivity(intent)
-        }
-
-        //test scanner
-        scannerbtn.setOnClickListener {
-            val intent = Intent(this, ScanActivity::class.java)
-            intent.putExtra("data", data)
-            startActivity(intent)
-        }
-
-        //test Puzzle
-        puzzlebtn.setOnClickListener {
-            val intent = Intent(this, PuzzleActivity::class.java)
-            intent.putExtra("data", data)
-            startActivity(intent)
-        }
-
-        //test Math
-        mathbtn.setOnClickListener {
-            val intent = Intent(this, MathSolver::class.java)
-            intent.putExtra("data", data)
-            startActivity(intent)
-        }
     }
 
     // for task
@@ -258,17 +230,4 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         builder.show()
     }
 
-    /*
-    // for snooze limit
-    fun snoozeLimitDialog(v: View) {
-        val builder = AlertDialog.Builder(this)
-        builder.setTitle("Snooze Limit")
-        val checkedItem = data.limit
-        builder.setSingleChoiceItems(snoozeLimitItems, checkedItem) { _, which ->
-            snoozeLimit.text = snoozeLimitItems[which]
-            data.limit = snoozeLimitItems.indexOf(snoozeLimit.text)
-        }
-        builder.setPositiveButton("Done") { dialog, _ -> dialog.dismiss() }
-        builder.show()
-    }*/
 }

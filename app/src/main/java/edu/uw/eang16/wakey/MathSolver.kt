@@ -48,7 +48,7 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
                         WindowManager.LayoutParams.FLAG_SHOW_WHEN_LOCKED or
                         WindowManager.LayoutParams.FLAG_TURN_SCREEN_ON)
         }
-        
+
         setContentView(R.layout.activity_math_solver)
         problem.text = makeProblem()
         val data = intent!!.getParcelableExtra("data") as AlarmData
