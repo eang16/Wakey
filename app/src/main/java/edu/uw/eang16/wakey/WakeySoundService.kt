@@ -47,7 +47,15 @@ class WakeySoundService: Service() {
             manager.createNotificationChannel(channel!!)
         }
 
-        val intent = Intent(context, MainActivity::class.java)
+        val intent = when(data.task) {
+            Task.NONE -> Intent(context, NoTask::class.java)
+            Task.MATH -> Intent(context, MathSolver::class.java)
+            Task.SCAN -> Intent(context, ScanActivity::class.java)
+            Task.SHAKE -> Intent(context, ShakeActivity::class.java)
+            Task.GAME -> Intent(context, PuzzleActivity::class.java)
+            else -> Intent(context, NoTask::class.java)
+        }
+        intent.putExtra("data", data)
         val pendingIntent = TaskStackBuilder.create(context).run {
             // Add the intent, which inflates the back stack
             addNextIntentWithParentStack(intent)
