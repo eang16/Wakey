@@ -63,7 +63,6 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
 
     private fun updateCodeList(label: String) {
         val myFile = File(filesDir, "codeList")
-        if (!myFile.exists()) { myFile.createNewFile() }
         val writer = FileWriter(myFile, true)
         writer.write(label + "\n")
         writer.close()
