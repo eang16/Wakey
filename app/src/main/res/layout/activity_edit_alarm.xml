@@ -229,7 +229,8 @@
     <SeekBar
         android:id="@+id/vibrationBar"
         android:layout_width="0dp"
-        android:max="100"
+        android:max="254"
+        android:min="0"
         android:layout_height="wrap_content"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="@id/buttonWrapper"

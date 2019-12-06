@@ -59,7 +59,7 @@ class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
             var task = Task.NONE
             var ringtone = RingtoneManager.getActualDefaultRingtoneUri(applicationContext, RingtoneManager.TYPE_RINGTONE)
             var volume = 100
-            var vibration = 100
+            var vibration = 255
             var snooze = 3
             var limit = 3
             var active = true

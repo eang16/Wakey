@@ -8,16 +8,18 @@ import android.media.Ringtone
 import android.media.RingtoneManager
 import android.os.Build
 import android.os.IBinder
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import androidx.core.app.NotificationCompat
 
 class WakeySoundService: Service() {
     lateinit var data: AlarmData
-    lateinit var ringtone: Ringtone
     private val CHANNEL_ID = "Wakey Alarm Clock Notification Channel"
     private var notifChannel: NotificationChannel? = null
     private var notifManager: NotificationManager? = null
     private var player: MediaPlayer? = null
+    private var vibrator: Vibrator? = null
 
     private fun getNC(): NotificationChannel? {
         if (notifChannel == null && Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -71,6 +73,17 @@ class WakeySoundService: Service() {
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
         data = intent!!.getParcelableExtra("data") as AlarmData
+
+        vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        val pattern = longArrayOf(0, 200, 100)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (data.vibration != 0) {
+                vibrator?.vibrate(VibrationEffect.createWaveform(pattern, intArrayOf(0, data.vibration, 0), 0))
+            }
+        } else {
+            vibrator?.vibrate(pattern, 0)
+        }
+
         player = MediaPlayer.create(this, data.ringtone).apply {
             isLooping = true
             setVolume(data.volume.toFloat() / 100, data.volume.toFloat() / 100)
@@ -83,6 +96,7 @@ class WakeySoundService: Service() {
     override fun onDestroy() {
         stopForeground(true)
         player?.stop()
+        vibrator?.cancel()
         super.onDestroy()
     }
 }
