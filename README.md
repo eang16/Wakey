@@ -9,7 +9,7 @@ Our application “Wakey” is an alternative alarm clock application that users
 
 Tap on the 'add' button to add a new alarm
 
-Tap on each of the scheduled alarm to edit it, turns it on/off, or delete it
+Tap on each of the scheduled alarm to edit it, turn it on/off, or delete it
 
 
 ![wakey_homescreen](https://user-images.githubusercontent.com/32310896/70289255-0f20fd00-1789-11ea-8d3b-0ce4ce783122.jpg)
