@@ -63,7 +63,7 @@ class QRBarcodeList : AppCompatActivity() {
         return FileReader(myFile).readText()
     }
 
-    private fun readCodeList(): Array<String> {
+    private fun readCodeList(): List<String> {
         val myFile = File(filesDir, "codeList")
         val codeArray = FileReader(myFile).readText().split("\n")
         return codeArray
