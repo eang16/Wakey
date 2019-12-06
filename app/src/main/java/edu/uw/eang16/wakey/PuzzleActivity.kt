@@ -29,7 +29,6 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
         setContentView(R.layout.activity_puzzle_solver)
 
         val data = this.intent!!.getParcelableExtra("data") as AlarmData
-//        startAlarm(data, this)
         val buttons = arrayOf(button, button2, button3,
                               button4, button5, button6,
                               button7, button8, button9)
@@ -61,7 +60,7 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
 
 
         snooze.setOnClickListener {
-            if (snoozeAlarm(data, it.context)) {
+            if (snoozeAlarm(data, applicationContext)) {
                 Log.e("msg", "Snooze button pressed")
                 finish()
             }
@@ -76,7 +75,6 @@ class PuzzleActivity: AppCompatActivity(), WakeyAlarm {
             }
             if(check) {
                 Toast.makeText(this, "Correct pattern!", Toast.LENGTH_SHORT).show()
-                //stopAlarm(data, this)
                 stopAlarm(data, applicationContext)
                 finish()
             } else {

@@ -43,7 +43,7 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
         shakeText = findViewById(R.id.shakePercentage)
 
         snooze.setOnClickListener{
-            if (snoozeAlarm(data, this)) {
+            if (snoozeAlarm(data, applicationContext)) {
                 finish()
             }
         }

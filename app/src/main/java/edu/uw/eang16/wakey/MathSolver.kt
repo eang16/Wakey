@@ -43,7 +43,7 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         val data = intent!!.getParcelableExtra("data") as AlarmData
 
         snooze.setOnClickListener {
-            if (snoozeAlarm(data, it.context)) {
+            if (snoozeAlarm(data, applicationContext)) {
                 Log.e("msg", "Snooze button pressed")
                 finish()
             }

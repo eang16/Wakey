@@ -32,7 +32,7 @@ class ScanActivity : AppCompatActivity(), WakeyAlarm, ZXingScannerView.ResultHan
         data = this.intent!!.getParcelableExtra("data")
 
         snooze.setOnClickListener{
-            if (snoozeAlarm(data, this)) {
+            if (snoozeAlarm(data, applicationContext)) {
                 finish()
             }
         }

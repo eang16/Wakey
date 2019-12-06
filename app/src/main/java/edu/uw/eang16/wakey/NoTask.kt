@@ -21,7 +21,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
 
         snoozeBtn.setOnClickListener {
-            if (snoozeAlarm(data, it.context)) {
+            if (snoozeAlarm(data, applicationContext)) {
                 finish()
             }
         }
