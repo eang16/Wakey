@@ -38,8 +38,6 @@ class AlarmService : Service() {
 
 
     fun soundAlarm(context: Context, data: AlarmData) {
-        Log.e("msg", data.id + " Sounding")
-        // Todo: Form an intent using the when(x) case -> format
         var task = data.task
         if (task == Task.RANDOM) {
             val rand = Random().nextInt(4) + 1

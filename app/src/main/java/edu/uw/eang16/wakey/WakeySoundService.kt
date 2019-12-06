@@ -70,10 +70,10 @@ class WakeySoundService: Service() {
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Log.e("msg", "Music should be playing right about now")
         data = intent!!.getParcelableExtra("data") as AlarmData
         player = MediaPlayer.create(this, data.ringtone).apply {
             isLooping = true
+            setVolume(data.volume.toFloat() / 100, data.volume.toFloat() / 100)
             start()
         }
         startForeground(data.id.toInt(), buildNotification(this))

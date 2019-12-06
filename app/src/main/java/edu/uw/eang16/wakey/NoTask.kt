@@ -23,7 +23,6 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
 
         snoozeBtn.setOnClickListener {
             if (snoozeAlarm(data, it.context)) {
-                Log.e("msg", "Snooze button pressed")
                 finish()
             }
         }

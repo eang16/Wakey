@@ -36,7 +36,6 @@ fun activateAlarm(data: AlarmData, context: Context) {
         86400000,
         AlarmHelper.getIntent(data, context.applicationContext)
     )
-    Log.e("msg", "Alarm set: " + data.id)
 }
 
 fun deactivateAlarm(data: AlarmData, context: Context) {
@@ -44,5 +43,4 @@ fun deactivateAlarm(data: AlarmData, context: Context) {
     val pd = AlarmHelper.getIntent(data, context.applicationContext)
     pd.cancel()
     am.cancel(pd)
-    Log.e("msg", "Alarm Canceled: " + data.id)
 }
