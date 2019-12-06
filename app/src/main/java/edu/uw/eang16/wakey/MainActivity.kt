@@ -1,5 +1,6 @@
 package edu.uw.eang16.wakey
 
+import android.Manifest
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
@@ -8,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 import kotlinx.android.synthetic.main.activity_main.*
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Parcelable
 import android.util.Log
@@ -18,6 +20,8 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.parcel.Parcelize
 import kotlinx.android.synthetic.main.content_main.*
@@ -37,6 +41,11 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         aList = mutableListOf()
+
+        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
+        }
 
         fab.setOnClickListener { view ->
             val intent = Intent(this, EditAlarm::class.java)

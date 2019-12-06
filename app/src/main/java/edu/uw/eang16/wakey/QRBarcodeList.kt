@@ -10,6 +10,7 @@ import android.widget.ListView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import kotlinx.android.synthetic.main.code_list.*
+import kotlinx.android.synthetic.main.code_list_item.*
 import kotlinx.android.synthetic.main.save_code.*
 import java.io.File
 import java.io.FileReader
@@ -23,19 +24,14 @@ class QRBarcodeList : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         setContentView(R.layout.code_list)
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_single_choice, codeList)
+        val adapter = ArrayAdapter(this, R.layout.code_list_item, codeList)
 
         val listView = findViewById<ListView>(R.id.listview)
 
         listView.adapter = adapter
-
-        codeList.addAll(Scanner.codeArray)
+        val codeArray = readCodeList()
+        codeList.addAll(codeArray)
         adapter.notifyDataSetChanged()
-
-        val cameraPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
-        if (cameraPermission != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 1)
-        }
 
         scan.setOnClickListener {
             val intent = Intent(this, Scanner::class.java)
@@ -65,6 +61,12 @@ class QRBarcodeList : AppCompatActivity() {
     private fun readPosition(fileName: String): String {
         val myFile = File(filesDir, fileName)
         return FileReader(myFile).readText()
+    }
+
+    private fun readCodeList(): Array<String> {
+        val myFile = File(filesDir, "codeList")
+        val codeArray = FileReader(myFile).readText().split("\n")
+        return codeArray
     }
 
     private fun updatePosition(fileName: String, value: String) {

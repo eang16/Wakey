@@ -44,7 +44,7 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
             val label = editText.text.toString()
             updateResult(label, rawResult.text)
             val intent = Intent(this, QRBarcodeList::class.java)
-            codeArray.add(label)
+            updateCodeList(label)
             startActivity(intent)}
         builder.setNegativeButton("Cancel") { _, _ ->
             mScannerView!!.resumeCameraPreview(this)
@@ -61,9 +61,17 @@ class Scanner : AppCompatActivity(), ZXingScannerView.ResultHandler{
         writer.close()
     }
 
-    companion object {
-        var codeArray = arrayListOf<String>()
+    private fun updateCodeList(label: String) {
+        val myFile = File(filesDir, "codeList")
+        if (!myFile.exists()) { myFile.createNewFile() }
+        val writer = FileWriter(myFile, true)
+        writer.write(label + "\n")
+        writer.close()
     }
+
+//    companion object {
+//        var codeArray = arrayListOf<String>()
+//    }
 
 
 }
