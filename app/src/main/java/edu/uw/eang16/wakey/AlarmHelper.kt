@@ -30,6 +30,7 @@ class AlarmHelper {
 fun activateAlarm(data: AlarmData, context: Context) {
     val am = AlarmHelper.getAlarmManager(context.applicationContext)
     deactivateAlarm(data, context.applicationContext)
+
     am.setRepeating(
         AlarmManager.RTC_WAKEUP,
         data.time.timeInMillis,

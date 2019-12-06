@@ -26,7 +26,7 @@ import java.io.File
 import java.io.FileReader
 import java.io.FileWriter
 
-class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener  {
+class EditAlarm : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var tasks = arrayOf("None", "Solve math problem", "Scan QR/Barcode", "Shake your phone",
             "Play a game", "Random")
     val snoozeDurationItems = arrayOf("None", "1 minute", "3 minutes", "5 minutes", "10 minutes", "15 minutes", "20 minutes", "30 minutes")

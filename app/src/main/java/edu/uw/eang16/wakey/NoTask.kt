@@ -18,7 +18,6 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_no_task)
         data = intent.getParcelableExtra("data")!!
-        startAlarm(data, this)
         time.text = SimpleDateFormat("hh:mm a").format(data.time.time)
 
         snoozeBtn.setOnClickListener {
@@ -28,7 +27,7 @@ class NoTask : AppCompatActivity(), WakeyAlarm {
         }
 
         stopBtn.setOnClickListener {
-            stopAlarm(data, it.context)
+            stopAlarm(data, applicationContext)
             finish()
         }
     }

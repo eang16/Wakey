@@ -10,7 +10,7 @@ import java.io.FileReader
 import java.text.SimpleDateFormat
 import java.util.*
 
-class AlarmService : Service() {
+class AlarmService : Service(), WakeyAlarm {
     private lateinit var data: AlarmData
 
     override fun onBind(intent: Intent?): IBinder? { return null }
@@ -54,6 +54,8 @@ class AlarmService : Service() {
             }
         intent.putExtra("data", data)
         intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP)
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+        startAlarm(data, applicationContext)
         context.startActivity(intent)
     }
 }
