@@ -41,7 +41,6 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         setContentView(R.layout.activity_math_solver)
         problem.text = makeProblem()
         val data = intent!!.getParcelableExtra("data") as AlarmData
-        startAlarm(data,this)
 
         snooze.setOnClickListener {
             if (snoozeAlarm(data, it.context)) {
@@ -53,7 +52,7 @@ class MathSolver: AppCompatActivity(), WakeyAlarm {
         math_submit.setOnClickListener {
             if (input_answer.text.toString().equals("$answer")) {
                 Toast.makeText(this, "Correct!", Toast.LENGTH_SHORT).show()
-                stopAlarm(data,this)
+                stopAlarm(data,applicationContext)
                 finish()
             } else {
                 Toast.makeText(this, "Wrong answer. Try again!", Toast.LENGTH_SHORT).show()

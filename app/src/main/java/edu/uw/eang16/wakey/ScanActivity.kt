@@ -30,7 +30,6 @@ class ScanActivity : AppCompatActivity(), WakeyAlarm, ZXingScannerView.ResultHan
         }
 
         data = this.intent!!.getParcelableExtra("data")
-        startAlarm(data, this)
 
         snooze.setOnClickListener{
             if (snoozeAlarm(data, this)) {
@@ -48,7 +47,7 @@ class ScanActivity : AppCompatActivity(), WakeyAlarm, ZXingScannerView.ResultHan
     override fun handleResult(rawResult: Result) {
         if (rawResult.text == QRBarcodeList.selectedCode.toString()) {
             Toast.makeText(this, "Task solved! Alarm dismissed!", Toast.LENGTH_SHORT).show()
-            stopAlarm(data, this)
+            stopAlarm(data, applicationContext)
             finish()
         } else {
             Toast.makeText(this, "Wrong QR/Barcode. Scan again!", Toast.LENGTH_SHORT).show()

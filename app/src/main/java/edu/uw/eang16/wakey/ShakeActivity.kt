@@ -40,7 +40,6 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
         mAccelerometer = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER)
 
         data = this.intent!!.getParcelableExtra("data")
-        startAlarm(data, this)
         shakeText = findViewById(R.id.shakePercentage)
 
         snooze.setOnClickListener{
@@ -71,7 +70,7 @@ class ShakeActivity : AppCompatActivity(), WakeyAlarm, SensorEventListener {
             if (mShakeCount >= 100) {
                 shakeText!!.text = "100%"
                 Toast.makeText(this, "Task solved! Alarm dismissed!", Toast.LENGTH_LONG).show()
-                stopAlarm(data, this)
+                stopAlarm(data, applicationContext)
                 finish()
                 mSensorManager.unregisterListener(this, mAccelerometer)
             }
