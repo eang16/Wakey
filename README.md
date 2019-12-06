@@ -87,3 +87,12 @@ Tap on snooze button to snooze alarm or stop button to dismiss alarm
 
 
 ![wakey_alarmrings](https://user-images.githubusercontent.com/32310896/70290369-85732e80-178c-11ea-9e4f-9222e1fa9876.jpg)
+
+# Limitations
+1. Wakey alarm is inaccurate and the alarm may be off by few seconds to 5 minutes as we did not use Alarm Clock and Alarm Receiver in the first place to set the alarm.
+
+2. The logic behind Math Solver requires the user to solve math from left to right and ignore the order of operations such as performing multiplication and division first.
+
+# Acknowledgement
+Special thanks to Professor Alexis and TA Jiyun for a fun quarter and the guidance along the way! :) 
+
